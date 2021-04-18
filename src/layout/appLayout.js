@@ -5,6 +5,7 @@ import StartScene from "../scenes/startScene";
 import DateOfBirthScene from '../scenes/dateOfBirthScene';
 import CoronapassScene from '../scenes/coronapasScene';
 import UploadPictureScene from '../scenes/UploadPictureScene';
+import {checkIfUserHasPass} from '../service/firestore.service';
 
 
 
@@ -12,6 +13,7 @@ import UploadPictureScene from '../scenes/UploadPictureScene';
 const AppLayout = (props) => {
 
     const [scene, setScene] = useState(props.scene);
+    const [user, serUser] = useState(localStorage.getItem('userID'))
 
     const renderScene = () => {
         switch(scene) {
@@ -27,15 +29,24 @@ const AppLayout = (props) => {
         }
     }
 
+    const userHasCoronaPass = async () => {
+        const result = await checkIfUserHasPass(user)
+        if(result === true) {
+            setScene(3);
+        } else {
+            setScene(0);
+        }
+    }
+
     useEffect(() => {
-        setScene(props.scene)
+        userHasCoronaPass();
+        
     }, [])
 
-    
+
     return (
         <div className="scene-container">
             {renderScene()}
-            
         </div>
     )
 }
