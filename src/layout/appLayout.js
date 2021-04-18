@@ -11,7 +11,7 @@ import UploadPictureScene from '../scenes/UploadPictureScene';
 
 const AppLayout = (props) => {
 
-    const [scene, setScene] = useState(0);
+    const [scene, setScene] = useState(props.scene);
 
     const renderScene = () => {
         switch(scene) {
