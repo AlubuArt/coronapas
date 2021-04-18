@@ -11,6 +11,14 @@ export const checkIfUserHasPass = (userId) => {
     return false
 }
 
+export const setDateOfBirthInDatabase = async (user, dob) => {
+    const ref = coll.doc(user);
+    ref.set({
+        dateOfBirth: dob
+    }, {merge: true})
+
+}
+
 
 export const uploadPictureToStorage = async (user, picture) => {
     let upload = storageRef.child('userPictures/' + picture.name).put(picture);
@@ -32,7 +40,7 @@ export const uploadPictureToStorage = async (user, picture) => {
 }
 
 const addFileToUserProfile = (user, URLToFile) => {
-    var ref = coll.doc(user);
+    const ref = coll.doc(user);
     ref.set({
       picture: URLToFile
   

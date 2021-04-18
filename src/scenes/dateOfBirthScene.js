@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import {setDateOfBirthInDatabase} from '../service/firestore.service';
 
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -39,9 +40,12 @@ const DateOfBirthScene = ({value, onChange}) => {
 
     const classes = useStyles();
     const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
+    const [user] = useState(localStorage.getItem('userID'))
     const [dateOfBirth, setDateOfBirth] = useState(null);
 
-    const handleClick = () => {
+
+    const handleClick = async () => {
+        await setDateOfBirthInDatabase(user, dateOfBirth);
         if(dateOfBirth !== null || undefined) {
            onChange(2) 
         } else {
