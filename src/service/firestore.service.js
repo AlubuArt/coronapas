@@ -22,8 +22,9 @@ export const setDateOfBirthInDatabase = async (user, dob) => {
 
 export const uploadPictureToStorage = async (user, picture) => {
     let upload = storageRef.child('userPictures/' + picture.name).put(picture);
+    console.log(upload)
 
-    upload.on('state_changed', async (snapshot) => {
+    upload.on('state_changed', (snapshot) => {
         let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
     },
@@ -31,12 +32,14 @@ export const uploadPictureToStorage = async (user, picture) => {
         //handle errors
     },
     () => {
-      upload.snapshot.ref.getDownloadURL().then((URLToFile) => {
+    upload.snapshot.ref.getDownloadURL().then((URLToFile) => {
           console.log('file available at', URLToFile);
           addFileToUserProfile(user, URLToFile);
-      })  
+          
+      })
+        
     })
-    return
+    
 }
 
 const addFileToUserProfile = (user, URLToFile) => {

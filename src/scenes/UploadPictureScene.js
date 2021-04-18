@@ -45,7 +45,9 @@ const UploadPictureScene = ({value, onChange}) => {
     const handleClick = async (e) => {
         e.preventDefault();
         await uploadPictureToStorage(user, picture);
-        onChange(3)
+        onChange(3) 
+        
+        
     }
 
     const getPictureToUpload = () => {
