@@ -30,6 +30,8 @@ const AppLayout = (props) => {
     useEffect(() => {
         setScene(props.scene)
     }, [])
+
+    
     return (
         <div className="scene-container">
             {renderScene()}
