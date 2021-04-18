@@ -7,8 +7,8 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-import LoginView from './views/login';
-import SignupView from './views/signup';
+import LoginView from './pages/login';
+import SignupView from './pages/signup';
 import AppLayout from './layout/appLayout';
 
 

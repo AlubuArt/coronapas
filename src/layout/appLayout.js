@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable default-case */
 import React, {useState, useEffect} from 'react';
-import {StartScene, DateOfBirthScene, UploadPictureScene, CoronapassScene} from "../scenes";
+import StartScene from "../scenes/startScene";
+import DateOfBirthScene from '../scenes/dateOfBirthScene';
+import CoronapassScene from '../scenes/coronapasScene';
+import UploadPictureScene from '../scenes/UploadPictureScene';
+
 
 
 
