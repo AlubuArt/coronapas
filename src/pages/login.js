@@ -1,19 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {login} from '../service/login.service';
-import {loginUser} from '../service/login.service'
 import {Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import CardHeader from '@material-ui/core/CardHeader';
 import { useContainedCardHeaderStyles } from '@mui-treasury/styles/cardHeader/contained';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
-import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router';
 
 const useStyles = makeStyles(({ spacing }) => ({
