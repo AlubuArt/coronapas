@@ -17,10 +17,10 @@ function App() {
 
   const [user, setUser] = useState(localStorage.getItem('userID'));
 
-
-  useEffect(() => {
-
-  })
+useEffect(() => {
+    
+    
+}, [])
 
 
   return (
