@@ -15,7 +15,7 @@ import AppLayout from './layout/appLayout';
 
 function App() {
 
-  const [user, setUser] = useState("efef");
+  const [user, setUser] = useState(localStorage.getItem('userID'));
 
 
   useEffect(() => {
