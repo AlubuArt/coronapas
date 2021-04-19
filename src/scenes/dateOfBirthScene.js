@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import {Container, Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
@@ -8,7 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import {setDateOfBirthInDatabase} from '../service/firestore.service';
+import {sendDataToDatabase} from '../service/firestore.service';
+import {getPersonSwapi} from '../service/swapi.service'
 
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -42,10 +43,14 @@ const DateOfBirthScene = ({value, onChange}) => {
     const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
     const [user] = useState(localStorage.getItem('userID'))
     const [dateOfBirth, setDateOfBirth] = useState(null);
+    const [starWarsPerson, setStarWarsPerson] = useReducer((value, newValue) => ({...value, ...newValue}), {
+
+    })
 
 
     const handleClick = async () => {
-        await setDateOfBirthInDatabase(user, dateOfBirth);
+        await getDataFromSwapi();
+        await sendDataToDatabase(user, dateOfBirth, starWarsPerson); //TODO error handling
         if(dateOfBirth !== null || undefined) {
            onChange(2) 
         } else {
@@ -53,6 +58,23 @@ const DateOfBirthScene = ({value, onChange}) => {
         }
         
     }
+
+    const randomNumber = () => {
+       return Math.floor((Math.random() * 82) + 1);
+    }
+
+    const getDataFromSwapi = async () => {
+           const data =  await getPersonSwapi(randomNumber()); 
+           for (let [key, val] of Object.entries(data)) {
+            setStarWarsPerson({[key]: val})
+            }   
+    }
+
+    useEffect(() => {
+        getDataFromSwapi();
+    }, [])
+
+
     return (
         <Container fluid="true">
         <Card className={cx(classes.card, cardShadowStyles.root)}>

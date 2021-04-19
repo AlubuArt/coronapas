@@ -11,10 +11,19 @@ export const checkIfUserHasPass = (userId) => {
     return false
 }
 
-export const setDateOfBirthInDatabase = async (user, dob) => {
+export const sendDataToDatabase = async (user, dob, data) => {
     const ref = coll.doc(user);
     ref.set({
-        dateOfBirth: dob
+        dateOfBirth: dob,
+        name: data.name,
+        height: data.height,
+        hairColor: data.hair_color,
+        skinColor: data.skin_color,
+        mass: data.mass,
+        eyeColor: data.eye_color,
+        gender: data.gender,
+        homeworld: data.homeworld
+
     }, {merge: true})
 
 }
