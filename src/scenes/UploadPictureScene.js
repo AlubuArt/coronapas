@@ -50,8 +50,8 @@ const UploadPictureScene = ({value, onChange}) => {
         
     }
 
-    const getPictureToUpload = () => {
-        const selectedFile = document.getElementById('picture-upload').files[0];
+    const getPictureToUpload = async () => {
+        const selectedFile = await document.getElementById('picture-upload').files[0];
         setPicture(selectedFile);
     }
     return (

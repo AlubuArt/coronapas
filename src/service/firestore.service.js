@@ -58,6 +58,8 @@ export const uploadPictureToStorage = async (user, picture) => {
       })
         
     })
+
+    return
     
 }
 
