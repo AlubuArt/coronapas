@@ -48,7 +48,7 @@ const CoronapassScene = ({value, onChange}) => {
         
     })
     const [user] = useState(localStorage.getItem('userID'));
-    const [homeworldName, setHomeworldName] = useState();
+    const [homeworldName, setHomeworldName] = useState('');
     const [picture, setPicture] = useState('');
 
     
@@ -61,7 +61,7 @@ const CoronapassScene = ({value, onChange}) => {
             setPicture(data.picture)
             for (let [key, val] of Object.entries(data)) {
                 setCoronapasData({[key]: val})
-            }  
+            }
         } catch {}
        
        
@@ -80,12 +80,19 @@ const CoronapassScene = ({value, onChange}) => {
         
         const timer = setTimeout(() => {
           getCoronapasData()  
-          getHomeWorld()  
           }, 500);/*  */
           return  () => clearTimeout(timer);
-        
+
+          
+          
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
+    useEffect(() => {
+        getHomeWorld()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [coronapasData])
 
     return (
         <Container>
@@ -101,12 +108,10 @@ const CoronapassScene = ({value, onChange}) => {
                             <Grid item xs={6}>
                                 <h1>{coronapasData.name}</h1>
                             </Grid>
-
                         </Grid>
                         <Grid >
                             <Grid container spacing={2}>
-                                <Grid item xs={4}>
-                                  
+                                <Grid item xs={5}>
                                   <h4>Date of Birth</h4>
                                   <p>{coronapasData.dateOfBirth}</p>    
                                 </Grid>
@@ -116,8 +121,7 @@ const CoronapassScene = ({value, onChange}) => {
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2}>
-                                <Grid item xs={4}>
-                                  
+                                <Grid item xs={5}>
                                   <h4>Height</h4>
                                   <p>{coronapasData.height}</p>    
                                 </Grid>
@@ -126,10 +130,8 @@ const CoronapassScene = ({value, onChange}) => {
                                     <p>{coronapasData.mass}</p>  
                                 </Grid>
                             </Grid>
-                            <Grid item xs={8}>
                             <Grid container spacing={2}>
                                 <Grid item xs={5}>
-                                  
                                   <h4>Eye Color</h4>
                                   <p>{coronapasData.eyeColor}</p>    
                                 </Grid>
@@ -140,19 +142,14 @@ const CoronapassScene = ({value, onChange}) => {
                             </Grid>
                             <Grid container spacing={2}>
                                 <Grid item xs={5}>
-                                  
                                   <h4>Skin Color</h4>
                                   <p>{coronapasData.skinColor}</p>    
                                 </Grid>
                                 <Grid item xs={4}>
-                                  
                                   <h4>Worldhome</h4>
                                   <p>{homeworldName}</p>    
                                 </Grid>
                             </Grid>
-                            </Grid>
-
-
                         </Grid>
                     </CardContent>
                 </CardActionArea>

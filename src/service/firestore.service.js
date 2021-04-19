@@ -8,7 +8,7 @@ const db = firebase_app.firestore();
 const coll = db.collection('users/');
 
 export const checkIfUserHasPass = (userId) => {
-    return false
+    return true
 }
 
 export const sendDataToDatabase = async (user, dob, data) => {
