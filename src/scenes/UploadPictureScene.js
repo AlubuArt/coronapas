@@ -34,7 +34,7 @@ const useStyles = makeStyles(({ spacing }) => ({
   }));
 
 
-const UploadPictureScene = ({value, onChange}) => {
+const UploadPictureScene = ({onChange}) => {
 
     const classes = useStyles();
     const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
@@ -46,7 +46,6 @@ const UploadPictureScene = ({value, onChange}) => {
         e.preventDefault();
         await uploadPictureToStorage(user, picture);
         onChange(3) 
-        
         
     }
 

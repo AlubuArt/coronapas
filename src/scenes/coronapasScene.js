@@ -50,10 +50,9 @@ const useStyles = makeStyles(({ spacing }) => ({
 
   }));
 
-const CoronapassScene = ({value, onChange}) => {
+const CoronapassScene = () => {
 
     const classes = useStyles();
-    const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
     const [coronapasData, setCoronapasData] = useReducer((value, newValue) => ({...value, ...newValue}), {
         
     })
@@ -62,9 +61,6 @@ const CoronapassScene = ({value, onChange}) => {
     const [picture, setPicture] = useState('');
     const [qr, setQr] = useState(QR)
 
-    
-
-    
 
     const getCoronapasData = async () => {
         try {
@@ -86,7 +82,7 @@ const CoronapassScene = ({value, onChange}) => {
         
     }
 
-    // With async/await
+    
     const generateQR = async text => {
     try {
       const qrcode = await QRCode.toDataURL("my text")
@@ -102,10 +98,7 @@ const CoronapassScene = ({value, onChange}) => {
         const timer = setTimeout(() => {
           getCoronapasData()  
           }, 500);/*  */
-          return  () => clearTimeout(timer);
-
-          
-          
+          return  () => clearTimeout(timer); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -132,17 +125,23 @@ const CoronapassScene = ({value, onChange}) => {
                         </Grid>
                         <Grid >
                             <Grid container spacing={2}>
-                                <Grid  item xs={5}>
+                                <Grid  item xs={4}>
                                   <h4 >Date of Birth</h4>
                                   <p >{coronapasData.dateOfBirth}</p>    
                                 </Grid>
-                                <Grid  item xs={4}>
-                                   <h4 >Gender</h4>
-                                    <p >{coronapasData.gender}</p>  
+                                <Grid item xs={4}>
+                                  <h4>Worldhome</h4>
+                                  <p>{homeworldName}</p>    
                                 </Grid>
+                                                             
                             </Grid>
+                    
                             <Grid container spacing={2}>
-                                <Grid  item xs={5}>
+                                <Grid  item xs={4}>
+                                    <h4 >Gender</h4>
+                                        <p >{coronapasData.gender}</p>  
+                                    </Grid>
+                                <Grid  item xs={4}>
                                   <h4>Height</h4>
                                   <p>{coronapasData.height}</p>    
                                 </Grid>
@@ -150,26 +149,22 @@ const CoronapassScene = ({value, onChange}) => {
                                    <h4>Mass</h4>
                                     <p>{coronapasData.mass}</p>  
                                 </Grid>
+                                
                             </Grid>
                             <Grid container spacing={2}>
-                                <Grid item xs={5}>
-                                  <h4 >Eye Color</h4>
-                                  <p >{coronapasData.eyeColor}</p>    
-                                </Grid>
-                                <Grid item xs={5}>
-                                   <h4>Hair Color</h4>
-                                    <p>{coronapasData.hairColor}</p>  
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
-                                <Grid item xs={5}>
+                                <Grid item xs={4}>
                                   <h4>Skin Color</h4>
                                   <p>{coronapasData.skinColor}</p>    
                                 </Grid>
                                 <Grid item xs={4}>
-                                  <h4>Worldhome</h4>
-                                  <p>{homeworldName}</p>    
+                                  <h4 >Eye Color</h4>
+                                  <p >{coronapasData.eyeColor}</p>    
                                 </Grid>
+                                <Grid item xs={4}>
+                                   <h4>Hair Color</h4>
+                                    <p>{coronapasData.hairColor}</p>  
+                                </Grid>
+                                
                             </Grid>
                         </Grid>
                         <CardContent>

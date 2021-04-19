@@ -8,7 +8,7 @@ const db = firebase_app.firestore();
 const coll = db.collection('users/');
 
 export const checkIfUserHasPass = (userId) => {
-    return true
+    return false
 }
 
 export const sendDataToDatabase = async (user, dob, data) => {
@@ -41,7 +41,7 @@ export const getUserDataFromDatabase = async (user) => {
 
 export const uploadPictureToStorage = async (user, picture) => {
     let upload = storageRef.child('userPictures/' + picture.name).put(picture);
-    console.log(upload)
+    
 
     upload.on('state_changed', (snapshot) => {
         let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -52,7 +52,7 @@ export const uploadPictureToStorage = async (user, picture) => {
     },
     () => {
     upload.snapshot.ref.getDownloadURL().then((URLToFile) => {
-          console.log('file available at', URLToFile);
+          
           addFileToUserProfile(user, URLToFile);
           
       })

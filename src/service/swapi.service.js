@@ -10,7 +10,6 @@ export const getPersonSwapi = async (req) => {
 
 const data = await axios(config)
 .then(function (response) {
-  console.log(JSON.stringify(response.data));
   return response.data;
 })
 .catch(function (error) {
@@ -33,7 +32,6 @@ export const getHomeWorldFromSwapi = async (req) => {
 
 const data = await axios(config)
   .then(function (response) {
-    console.log(JSON.stringify(response.data));
     return response.data
 })
 .catch(function (error) {
