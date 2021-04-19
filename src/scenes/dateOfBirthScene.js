@@ -36,6 +36,9 @@ const useStyles = makeStyles(({ spacing }) => ({
 
   }));
 
+const randomNumber = () => {
+       return Math.floor((Math.random() * 82) + 1);
+}
 
 const DateOfBirthScene = ({value, onChange}) => {
 
@@ -49,7 +52,7 @@ const DateOfBirthScene = ({value, onChange}) => {
 
 
     const handleClick = async () => {
-        await getDataFromSwapi();
+        
         await sendDataToDatabase(user, dateOfBirth, starWarsPerson); //TODO error handling
         if(dateOfBirth !== null || undefined) {
            onChange(2) 
@@ -59,19 +62,19 @@ const DateOfBirthScene = ({value, onChange}) => {
         
     }
 
-    const randomNumber = () => {
-       return Math.floor((Math.random() * 82) + 1);
-    }
+   
 
     const getDataFromSwapi = async () => {
            const data =  await getPersonSwapi(randomNumber()); 
            for (let [key, val] of Object.entries(data)) {
             setStarWarsPerson({[key]: val})
-            }   
+            }     
+
     }
 
-    useEffect(() => {
-        getDataFromSwapi();
+    useEffect( () => {
+        getDataFromSwapi()
+
     }, [])
 
 

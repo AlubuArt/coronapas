@@ -28,6 +28,16 @@ export const sendDataToDatabase = async (user, dob, data) => {
 
 }
 
+export const getUserDataFromDatabase = async (user) => {
+
+    let data;
+    let ref = coll.doc(user);
+    await ref.get().then((doc) => {
+        data = doc.data();
+    })
+    return data;
+
+}
 
 export const uploadPictureToStorage = async (user, picture) => {
     let upload = storageRef.child('userPictures/' + picture.name).put(picture);
