@@ -4,7 +4,10 @@ Få genereret dit nye coronapas som kan bruges i hele galaksen! Så du kan komme
 
 ## Hvordan får jeg mit pas?
 
-Login på applikationen foregår her: https://coronapas-b0c6c.web.app
+Besøg applikationen med din smartphone her: https://coronapas-b0c6c.web.app
+
+![image](https://user-images.githubusercontent.com/57637214/115185276-ce0c5d00-a0df-11eb-8e36-d39ef86d6331.png)
+
 
 
 1. Opret en ny bruger, med email og password
