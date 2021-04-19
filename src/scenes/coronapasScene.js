@@ -9,13 +9,15 @@ import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
+import './coronapas.scss';
+
 
 const useStyles = makeStyles(({ spacing }) => ({
     card: {
         marginTop: 40,
         borderRadius: spacing(0.5),
         transition: '0.3s',
-        width: '95%',
+        width: '100%',
         //overflow: 'initial',
         background: '#ffffff',
       },
@@ -35,6 +37,18 @@ const useStyles = makeStyles(({ spacing }) => ({
 
         maxWidth: 100,
 
+
+      }, 
+      banner: {
+          background: "blue",
+          textAlign: 'center',
+          color: 'white',
+          fontSize: 32,
+
+      },
+      title: {
+          marginBottom: 1,
+          marginTop: 1,
 
       }
 
@@ -98,7 +112,7 @@ const CoronapassScene = ({value, onChange}) => {
         <Container>
             <Card className={cx(classes.card, cardShadowStyles.root)}>
                 <CardActionArea>
-                    <CardContent>
+                    <CardContent className="coronapas-container">
                         <Grid container spacing={3}>
                             <Grid item xs={6}>
                             <div>
@@ -111,29 +125,29 @@ const CoronapassScene = ({value, onChange}) => {
                         </Grid>
                         <Grid >
                             <Grid container spacing={2}>
-                                <Grid item xs={5}>
-                                  <h4>Date of Birth</h4>
-                                  <p>{coronapasData.dateOfBirth}</p>    
+                                <Grid  item xs={5}>
+                                  <h4 >Date of Birth</h4>
+                                  <p >{coronapasData.dateOfBirth}</p>    
                                 </Grid>
-                                <Grid item xs={4}>
-                                   <h4>Gender</h4>
-                                    <p>{coronapasData.gender}</p>  
+                                <Grid  item xs={4}>
+                                   <h4 >Gender</h4>
+                                    <p >{coronapasData.gender}</p>  
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2}>
-                                <Grid item xs={5}>
+                                <Grid  item xs={5}>
                                   <h4>Height</h4>
                                   <p>{coronapasData.height}</p>    
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid  item xs={4}>
                                    <h4>Mass</h4>
                                     <p>{coronapasData.mass}</p>  
                                 </Grid>
                             </Grid>
                             <Grid container spacing={2}>
                                 <Grid item xs={5}>
-                                  <h4>Eye Color</h4>
-                                  <p>{coronapasData.eyeColor}</p>    
+                                  <h4 >Eye Color</h4>
+                                  <p >{coronapasData.eyeColor}</p>    
                                 </Grid>
                                 <Grid item xs={5}>
                                    <h4>Hair Color</h4>
@@ -151,6 +165,14 @@ const CoronapassScene = ({value, onChange}) => {
                                 </Grid>
                             </Grid>
                         </Grid>
+                        
+                        <Grid container className={classes.banner}>
+                            <Grid item xs={12}>
+                                <div>vaccineret</div>
+                            </Grid>
+                        </Grid> 
+                        
+                        
                     </CardContent>
                 </CardActionArea>
             </Card>
