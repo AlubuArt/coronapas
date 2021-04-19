@@ -1,5 +1,19 @@
 .coronapas-container {
     
+    color: white;
+
+    .coronapas-card {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4), 0 10px 25px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    
+    .card-title {
+        
+        display: flex;
+        align-items: center
+        
+    }
+    
     h4 {
         margin-bottom: 2px;
         margin-top: 2px;
@@ -7,6 +21,54 @@
     }
 
     p {
-        margin-top: 3px
+        margin-top: 3px;
+        margin-bottom: 3px;
     }
+
+    
+
+    .banner {
+          background-color:#2bc2ee;
+          text-align: center;
+          color: white;
+          font-size: 32px;
+          margin-top: 10px;
+    }
+
+    .qr-code {
+        text-align: center;
+        margin-top: 10px;
+        background-color: white;
+        
+        img {
+            height: 150px;
+        }
+        
+    }
+
+    .pdf-button {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 150px;
+    }
+
+    
+}
+
+
+.MuiCardContent-root{
+    background-color: #736568;
+    height: 100%;
+    height: stretch;
+    color: white;
+    
+
+    
+}
+
+.scene-container {
+    background-color: #45393d;
+    min-height: 667px;
+    padding-top: 16px;
+    
 }

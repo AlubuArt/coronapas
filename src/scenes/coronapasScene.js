@@ -10,11 +10,13 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import './coronapas.scss';
+import QRCode from 'qrcode';
+import QR from '../images/qrcode.png';
 
 
 const useStyles = makeStyles(({ spacing }) => ({
     card: {
-        marginTop: 40,
+        marginTop: 10,
         borderRadius: spacing(0.5),
         transition: '0.3s',
         width: '100%',
@@ -39,13 +41,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 
 
       }, 
-      banner: {
-          background: "blue",
-          textAlign: 'center',
-          color: 'white',
-          fontSize: 32,
-
-      },
+      
       title: {
           marginBottom: 1,
           marginTop: 1,
@@ -64,6 +60,7 @@ const CoronapassScene = ({value, onChange}) => {
     const [user] = useState(localStorage.getItem('userID'));
     const [homeworldName, setHomeworldName] = useState('');
     const [picture, setPicture] = useState('');
+    const [qr, setQr] = useState(QR)
 
     
 
@@ -89,6 +86,16 @@ const CoronapassScene = ({value, onChange}) => {
         
     }
 
+    // With async/await
+    const generateQR = async text => {
+    try {
+      const qrcode = await QRCode.toDataURL("my text")
+      console.log(qrcode)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
 
     useEffect(() => {
         
@@ -109,17 +116,17 @@ const CoronapassScene = ({value, onChange}) => {
     }, [coronapasData])
 
     return (
-        <Container>
-            <Card className={cx(classes.card, cardShadowStyles.root)}>
+        <Container className="coronapas-container">
+            <Card className="coronapas-card">
                 <CardActionArea>
-                    <CardContent className="coronapas-container">
+                    <CardContent >
                         <Grid container spacing={3}>
                             <Grid item xs={6}>
                             <div>
                                 <img className={classes.img} alt="jhon" src={picture}></img> 
                             </div>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid className="card-title" item xs={6}>
                                 <h1>{coronapasData.name}</h1>
                             </Grid>
                         </Grid>
@@ -165,18 +172,25 @@ const CoronapassScene = ({value, onChange}) => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        
-                        <Grid container className={classes.banner}>
-                            <Grid item xs={12}>
+                        <CardContent>
+                           <Grid className="banner"item xs={12}>
                                 <div>vaccineret</div>
                             </Grid>
-                        </Grid> 
+                            <Grid div className="qr-code">
+                                <img alt="qr" src={qr} />
+                            </Grid> 
+                        </CardContent>
                         
-                        
+                
                     </CardContent>
                 </CardActionArea>
-            </Card>
+            </Card> 
+            <Grid className="pdf-button">
+               <Button variant="contained">Gem som PDF</Button> 
+            </Grid>
+            
         </Container>
+       
     )
 }
 
