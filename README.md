@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+# React coronapas generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Få genereret dit nye coronapas som kan bruges i hele galaksen! Så du kan komme på ferie på Tatooine, Yavin VI, Endor m.m.
 
-## Available Scripts
+## Hvordan får jeg mit pas?
 
-In the project directory, you can run:
+Login på applikationen foregår her: https://coronapas-b0c6c.web.app/login
+
+1. Opret en ny bruger, med email og password
+2. Opret nyt coronapas ved at oplyse fødselsdato og upload et billede af dig selv.
+3. Når dit nye pas er klar, kan du finde det i applikationen, hvor du også kan downloade det som pdf.
 
 ### `yarn start`
 
