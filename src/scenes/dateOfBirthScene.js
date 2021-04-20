@@ -31,11 +31,11 @@ const randomCoronaStatus = () => {
        case 1:
            return "Vaccinated"
        case 2:
-           return "Immune to Corona"
+           return "Has the force"
         case 3:
             return "Contagious"
         case 4: 
-            return "Had Corona already"
+            return "Has the force"
         case 5: 
             return "Negative test"
    }

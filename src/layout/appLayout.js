@@ -13,7 +13,7 @@ import {checkIfUserHasPass} from '../service/firestore.service';
 const AppLayout = (props) => {
 
     const [scene, setScene] = useState(props.scene);
-    const [user, serUser] = useState(localStorage.getItem('userID'))
+    const [user] = useState(localStorage.getItem('userID'))
 
     const renderScene = () => {
         switch(scene) {

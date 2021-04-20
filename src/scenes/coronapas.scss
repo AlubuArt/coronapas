@@ -6,6 +6,13 @@
         box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4), 0 10px 25px 0 rgba(0, 0, 0, 0.3);
     }
 
+
+    .card-container {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4), 0 10px 25px 0 rgba(0, 0, 0, 0.3);
+        text-align: center;
+
+    }
+
     
     .card-title {
         
@@ -84,3 +91,15 @@
     padding-top: 16px;
     
 }
+
+.login-header {
+
+    font-family: 'starjedihollow';
+    color: #FFE81F;
+    font-size: 28px
+}
+
+.form-control{
+    margin-top: 10px
+}
+
