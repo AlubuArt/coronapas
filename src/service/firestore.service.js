@@ -7,8 +7,19 @@ const storageRef = storage.ref();
 const db = firebase_app.firestore();
 const coll = db.collection('users/');
 
-export const checkIfUserHasPass = (userId) => {
-    return false
+
+
+export const checkIfUserHasPass = async (user) => {
+    let result = false;
+    let ref = coll.doc(user);
+    await ref.get().then((doc) => {
+        if(doc.data().picture) {
+            result = true;
+        }
+    })
+    return result
+
+    
 }
 
 export const sendDataToDatabase = async (user, dob, data) => {
