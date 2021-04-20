@@ -19,6 +19,7 @@ Besøg applikationen med din smartphone her: https://coronapas-b0c6c.web.app
 ### Udviklet med
 
 Create-react-app
+
 React Router
 Swapi API
 Axios
