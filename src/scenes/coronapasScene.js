@@ -1,11 +1,10 @@
 import React, {useEffect, useState, useReducer} from 'react';
 import {getUserDataFromDatabase} from '../service/firestore.service';
 import {getHomeWorldFromSwapi} from '../service/swapi.service';
-import {Container, Grid} from '@material-ui/core'
+import {Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import './coronapas.scss';
 import QR from '../images/qrcode.png';
@@ -26,14 +25,13 @@ const useStyles = makeStyles(() => ({
 const CoronapassScene = ({userID}) => {
 
     const classes = useStyles();
-    const [coronapasData, setCoronapasData] = useReducer((value, newValue) => ({...value, ...newValue}), {
-        picture: ''
-        
-    })
     const [user] = useState(userID);
     const [homeworldName, setHomeworldName] = useState('');
     const [qr] = useState(QR)
-
+    const [coronapasData, setCoronapasData] = useReducer((value, newValue) => ({...value, ...newValue}), {
+            picture: ''
+            
+        })
 
     const getCoronapasData = async () => {
         try {
