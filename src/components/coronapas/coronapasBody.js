@@ -16,7 +16,7 @@ const CoronapasBody = (props) => {
                 </Grid>
                 <Grid item xs={4}>
                     <h4>Worldhome</h4>
-                    <p>{props.data.homeworldName}</p>    
+                    <p>{props.homeworldName}</p>    
                 </Grid>
                                                              
             </Grid>
