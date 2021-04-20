@@ -21,10 +21,15 @@ Besøg applikationen med din smartphone her: https://coronapas-b0c6c.web.app
 Create-react-app
 
 React Router
+
 Swapi API
+
 Axios
+
 Firebase Auth/Firestore/Storage/Hosting
+
 Material-ui
+
 React-Pdf
 
 
