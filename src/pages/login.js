@@ -42,7 +42,7 @@ const LoginView = ({ history }) => {
     }
 
     return (
-        <Container className="coronapas-container" luid="true">
+        <Container className="coronapas-container" fluid="true">
                 <Card className="card-container">
                     
                     

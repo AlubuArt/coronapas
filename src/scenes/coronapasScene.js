@@ -64,7 +64,7 @@ const CoronapassScene = ({userID}) => {
     
 
     return (
-        <Container className="coronapas-container">
+        <Container className="coronapas-container" fluid="true">
             <Card className="coronapas-card">
                 <CardActionArea>
                     <CardContent >
