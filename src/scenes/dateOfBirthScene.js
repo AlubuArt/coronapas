@@ -1,7 +1,6 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import {Container, Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,23 +11,8 @@ import {sendDataToDatabase} from '../service/firestore.service';
 import {getPersonSwapi} from '../service/swapi.service'
 
 
-const useStyles = makeStyles(({ spacing }) => ({
-    card: {
-        marginTop: 40,
-        borderRadius: spacing(0.5),
-        transition: '0.3s',
-        width: '95%',
-        //overflow: 'initial',
-        background: '#ffffff',
-      },
-      content: {
-        paddingTop: 0,
-        textAlign: 'left',
-        overflowX: 'auto',
-        '& table': {
-          marginBottom: 0,
-        }
-      },
+const useStyles = makeStyles(() => ({
+    
       button : {
           marginTop: 20,
           marginRight: 20
@@ -60,8 +44,7 @@ const randomCoronaStatus = () => {
 
 const DateOfBirthScene = ({onChange, userID}) => {
 
-    const classes = useStyles();
-    const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
+    const classes = useStyles();;
     const [user] = useState(userID)
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [coronaStatus, setCoronaStatus] = useState('')
@@ -69,9 +52,9 @@ const DateOfBirthScene = ({onChange, userID}) => {
 
     })
 
-    const handleClick = async () => {
+    const handleClick = () => {
         
-        await sendDataToDatabase(user, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
+        sendDataToDatabase(user, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
         if(dateOfBirth !== null || undefined) {
            onChange(2) 
         } else {
@@ -97,7 +80,7 @@ const DateOfBirthScene = ({onChange, userID}) => {
 
     return (
         <Container fluid="true">
-        <Card className={cx(classes.card, cardShadowStyles.root)}>
+        <Card className="coronapas-card">
             <CardActionArea>
                 <CardContent>
                     <Typography variant="h6">Indtast din fødselsdato</Typography>

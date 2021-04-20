@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Container, Input, Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';

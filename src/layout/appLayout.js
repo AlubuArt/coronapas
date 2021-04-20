@@ -43,7 +43,6 @@ const AppLayout = (props) => {
         
     }, [])
 
-
     return (
         <div className="scene-container">
             {renderScene()}

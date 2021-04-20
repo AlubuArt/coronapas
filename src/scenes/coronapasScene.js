@@ -11,7 +11,7 @@ import './coronapas.scss';
 import QR from '../images/qrcode.png';
 
 
-const useStyles = makeStyles(({ spacing }) => ({
+const useStyles = makeStyles(() => ({
     
       img : {
         maxWidth: 100,
@@ -28,8 +28,7 @@ const CoronapassScene = ({userID}) => {
     })
     const [user] = useState(userID);
     const [homeworldName, setHomeworldName] = useState('');
-    const [picture, setPicture] = useState()
-    const [qr, setQr] = useState(QR)
+    const [qr] = useState(QR)
 
 
     const getCoronapasData = async () => {
@@ -38,11 +37,7 @@ const CoronapassScene = ({userID}) => {
             for (let [key, val] of Object.entries(data)) {
                 setCoronapasData({[key]: val})
             }
-
-          
         } catch {}
-
-        
     }
 
 
@@ -51,12 +46,11 @@ const CoronapassScene = ({userID}) => {
             const hw = await getHomeWorldFromSwapi(coronapasData);
             setHomeworldName(hw);
         } catch (error) {}
-        
     }
 
     useEffect(() => {
-        getCoronapasData()
-        
+        getCoronapasData()   
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
 

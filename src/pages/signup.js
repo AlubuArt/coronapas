@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,33 +12,16 @@ import {makeNewUser }from '../service/signup.service';
 import {firebase_app} from '../service/configs/firebase.config';
 
 const useStyles = makeStyles(({ spacing }) => ({
-    card: {
-        marginTop: 40,
-        borderRadius: spacing(0.5),
-        transition: '0.3s',
-        width: '95%',
-        //overflow: 'initial',
-        background: '#ffffff',
-      },
-      content: {
-        paddingTop: 0,
-        textAlign: 'left',
-        overflowX: 'auto',
-        '& table': {
-          marginBottom: 0,
-        }
-      },
+    
       button : {
           marginTop: 20,
           marginRight: 20
       }
-
   }));
 
 const SignupView = ({history}) => {
 
-    const classes = useStyles();    
-    const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
+    const classes = useStyles();
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
 
@@ -47,15 +29,13 @@ const SignupView = ({history}) => {
     const newUser = async () => {
         try{
             await makeNewUser(email, pass);
-            handleSuccess();
-            
+            handleRedirectOnSuccess();
         } catch (error) {
             console.log(error)
         }
-       
     }
 
-    const handleSuccess = async () => {
+    const handleRedirectOnSuccess = async () => {
         try {
             await firebase_app.auth().signInWithEmailAndPassword(email, pass);
             history.push(`${process.env.PUBLIC_URL}/start`)
@@ -64,10 +44,9 @@ const SignupView = ({history}) => {
         }
     }
 
-    
     return (
-        <Container fluid="true">
-                <Card className={cx(classes.card, cardShadowStyles.root)}>
+        <Container className="coronapas-container" fluid="true">
+                <Card className="coronapas-card">
                     <CardActionArea>
                         <CardContent>
                             <TextField
@@ -88,8 +67,6 @@ const SignupView = ({history}) => {
                         </CardContent>
                     </CardActionArea>  
                 </Card>
-
-
         </Container>
     )
 }
