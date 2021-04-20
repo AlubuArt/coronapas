@@ -19,9 +19,9 @@ const StartScene = ({onChange}) => {
             <Card className="card-container">
                 <CardActionArea>
                     <CardContent>
-                    <CardTitle  
-                        text="Your journey here begins"
-                    />
+                        <CardTitle  
+                            text="Your journey here begins"
+                        />
                      
                         <Button onClick={() => handleClick()} variant="contained">Start</Button>
                     </CardContent>

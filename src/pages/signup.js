@@ -71,7 +71,7 @@ const SignupView = ({history}) => {
                                 onChange={(e) =>setPass(e.target.value)}
                             />
                             <div>
-                             <Button onClick={() => newUser()} variant="contained" className={cx(classes.button)}>Create new user</Button>   
+                                <Button onClick={() => newUser()} variant="contained" className={cx(classes.button)}>Create new user</Button>   
                             </div>
                         </CardContent>
                     </CardActionArea>  

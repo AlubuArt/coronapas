@@ -8,8 +8,6 @@ import UploadPictureScene from '../scenes/UploadPictureScene';
 import {checkIfUserHasPass} from '../service/firestore.service';
 
 
-
-
 const AppLayout = (props) => {
 
     const [scene, setScene] = useState(props.scene);
@@ -22,7 +20,7 @@ const AppLayout = (props) => {
             case 1:
                 return <DateOfBirthScene scene={scene} userID={user} onChange={setScene} />;
             case 2: 
-                return <UploadPictureScene scene={scene} userID={user} onChange={setScene} />
+                return <UploadPictureScene scene={scene} userID={user} onChange={setScene} />;
             case 3: 
                 return <CoronapassScene scene={scene} userID={user}  onChange={setScene} />;
             

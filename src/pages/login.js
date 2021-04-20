@@ -44,13 +44,11 @@ const LoginView = ({ history }) => {
     return (
         <Container className="coronapas-container" fluid="true">
                 <Card className="card-container">
-                    
-                    
                     <CardActionArea>
                         <CardContent>
-                        <CardTitle  
-                            text="Create your coronapas now"
-                        />
+                            <CardTitle  
+                                text="Create your coronapas now"
+                            />
                             
                             <TextField
                                 className="form-control"
@@ -65,16 +63,12 @@ const LoginView = ({ history }) => {
                                 onChange={(e) =>setPass(e.target.value)}
                             />
                             <div>
-                             <Button onClick={() => loginUser()} variant="contained" className={cx(classes.button)}>Login</Button>   
-                             <Button onClick={() => signup()} variant="contained" className={cx(classes.button)}>New user</Button>   
+                                <Button onClick={() => loginUser()} variant="contained" className={cx(classes.button)}>Login</Button>   
+                                <Button onClick={() => signup()} variant="contained" className={cx(classes.button)}>New user</Button>   
                             </div>
-                            
-                            
                         </CardContent>
                     </CardActionArea>  
                 </Card>
-
-
         </Container>
     )
 }
