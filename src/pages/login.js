@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {login} from '../service/login.service';
-import {Container} from '@material-ui/core'
+import {CardHeader, Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import { useContainedCardHeaderStyles } from '@mui-treasury/styles/cardHeader/contained';
-import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,38 +9,21 @@ import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { withRouter } from 'react-router';
+import CardTitle from '../components/cardTitle';
 
 const useStyles = makeStyles(({ spacing }) => ({
-    card: {
-        marginTop: 40,
-        borderRadius: spacing(0.5),
-        transition: '0.3s',
-        width: '95%',
-        //overflow: 'initial',
-        background: '#ffffff',
-      },
-      content: {
-        paddingTop: 0,
-        textAlign: 'left',
-        overflowX: 'auto',
-        '& table': {
-          marginBottom: 0,
-        }
-      },
       button : {
           marginTop: 20,
-          marginRight: 20
+          marginRight: 10,
+          marginLeft: 10,
+          
       }
-
   }));
 
 
 const LoginView = ({ history }) => {
 
     const classes = useStyles();
-    const cardHeaderStyles = useContainedCardHeaderStyles();
-    const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
-    const [user, setUser] = useState();
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
 
@@ -61,11 +42,14 @@ const LoginView = ({ history }) => {
     }
 
     return (
-        <Container fluid="true">
-           
-                <Card className={cx(classes.card, cardShadowStyles.root)}>
+        <Container className="coronapas-container" fluid="true">
+                <Card className="card-container">
                     <CardActionArea>
                         <CardContent>
+                            <CardTitle  
+                                text="Create your coronapas now"
+                            />
+                            
                             <TextField
                                 className="form-control"
                                 type="email"
@@ -79,16 +63,12 @@ const LoginView = ({ history }) => {
                                 onChange={(e) =>setPass(e.target.value)}
                             />
                             <div>
-                             <Button onClick={() => loginUser()} variant="contained" className={cx(classes.button)}>Login</Button>   
-                             <Button onClick={() => signup()} variant="contained" className={cx(classes.button)}>New user</Button>   
+                                <Button onClick={() => loginUser()} variant="contained" className={cx(classes.button)}>Login</Button>   
+                                <Button onClick={() => signup()} variant="contained" className={cx(classes.button)}>New user</Button>   
                             </div>
-                            
-                            
                         </CardContent>
                     </CardActionArea>  
                 </Card>
-
-
         </Container>
     )
 }
