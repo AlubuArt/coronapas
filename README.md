@@ -38,4 +38,14 @@ Sass
 
 React-Pdf
 
+### Product Backlog
 
+Logout function
+
+Bottom navigation
+
+Download PDF with PDF-reader
+
+API Proxy server for API calls
+
+More Star Wars Styling!!
