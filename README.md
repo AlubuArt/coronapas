@@ -20,7 +20,7 @@ Besøg applikationen med din smartphone her: https://coronapas-b0c6c.web.app
 2. Opret nyt coronapas ved at oplyse fødselsdato og upload et billede af dig selv.
 3. Når dit nye pas er klar, kan du finde det i applikationen, hvor du også kan downloade det som pdf.
 
-### Udviklet med
+## Udviklet med
 
 Create-react-app
 
@@ -38,7 +38,7 @@ Sass
 
 React-Pdf
 
-### Product Backlog
+## Product Backlog
 
 Logout function
 
