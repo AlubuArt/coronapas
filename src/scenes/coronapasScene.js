@@ -1,51 +1,20 @@
 import React, {useEffect, useState, useReducer} from 'react';
 import {getUserDataFromDatabase} from '../service/firestore.service';
 import {getHomeWorldFromSwapi} from '../service/swapi.service';
-import {Container, Input, Typography, Grid} from '@material-ui/core'
+import {Container, Grid} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
 import Card from '@material-ui/core/Card';
-import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import './coronapas.scss';
-import QRCode from 'qrcode';
 import QR from '../images/qrcode.png';
 
 
 const useStyles = makeStyles(({ spacing }) => ({
-    card: {
-        marginTop: 10,
-        borderRadius: spacing(0.5),
-        transition: '0.3s',
-        width: '100%',
-        //overflow: 'initial',
-        background: '#ffffff',
-      },
-      content: {
-        paddingTop: 0,
-        textAlign: 'left',
-        overflowX: 'auto',
-        '& table': {
-          marginBottom: 0,
-        }
-      },
-      button : {
-          marginTop: 20,
-          marginRight: 20
-      },
+    
       img : {
-
         maxWidth: 100,
-
-
-      }, 
-      
-      title: {
-          marginBottom: 1,
-          marginTop: 1,
-
       }
 
   }));
@@ -82,22 +51,12 @@ const CoronapassScene = () => {
         
     }
 
-    
-    const generateQR = async text => {
-    try {
-      const qrcode = await QRCode.toDataURL("my text")
-      console.log(qrcode)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
 
     useEffect(() => {
         
         const timer = setTimeout(() => {
           getCoronapasData()  
-          }, 800);/*  */
+          }, 1000);/*  */
           return  () => clearTimeout(timer); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -169,7 +128,7 @@ const CoronapassScene = () => {
                         </Grid>
                         <CardContent>
                            <Grid className="banner"item xs={12}>
-                                <div>vaccineret</div>
+                                <div>{coronapasData.coronaStatus}</div>
                             </Grid>
                             <Grid div className="qr-code">
                                 <img alt="qr" src={qr} />

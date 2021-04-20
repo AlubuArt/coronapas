@@ -1,10 +1,10 @@
 const axios = require('axios');
 
 export const getPersonSwapi = async (req) => {
-
+  var param = req;
     var config = {
         method: 'get',
-        url: `https://swapi.dev/api/people/${req}/`,
+        url: `https://swapi.dev/api/people/${param}/`,
         headers: { }
       };
 

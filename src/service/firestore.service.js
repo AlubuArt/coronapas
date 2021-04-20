@@ -17,12 +17,10 @@ export const checkIfUserHasPass = async (user) => {
             result = true;
         }
     })
-    return result
-
-    
+    return result  
 }
 
-export const sendDataToDatabase = async (user, dob, data) => {
+export const sendDataToDatabase = async (user, dob, data, status) => {
     const ref = coll.doc(user);
     ref.set({
         dateOfBirth: dob,
@@ -33,7 +31,8 @@ export const sendDataToDatabase = async (user, dob, data) => {
         mass: data.mass,
         eyeColor: data.eye_color,
         gender: data.gender,
-        homeworld: data.homeworld
+        homeworld: data.homeworld,
+        coronaStatus: status
 
     }, {merge: true})
 
@@ -53,7 +52,6 @@ export const getUserDataFromDatabase = async (user) => {
 export const uploadPictureToStorage = async (user, picture) => {
     let upload = storageRef.child('userPictures/' + picture.name).put(picture);
     
-
     upload.on('state_changed', (snapshot) => {
         let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');

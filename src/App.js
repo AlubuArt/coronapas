@@ -3,15 +3,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
- 
   Redirect
 } from "react-router-dom";
 import LoginView from './pages/login';
 import SignupView from './pages/signup';
 import AppLayout from './layout/appLayout';
 import {firebase_app} from './service/configs/firebase.config';
-
-
 
 
 function App() {

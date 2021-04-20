@@ -40,12 +40,31 @@ const randomNumber = () => {
        return Math.floor((Math.random() * 82) + 1);
 }
 
+const randomCoronaStatus = () => {
+   let n = Math.floor((Math.random() * 5) + 1);
+   // eslint-disable-next-line default-case
+   switch(n) {
+       case 1:
+           return "Vaccinated"
+       case 2:
+           return "Immune to Corona"
+        case 3:
+            return "Contagious"
+        case 4: 
+            return "Had Corona already"
+        case 5: 
+            return "Negative test"
+   }
+        
+}
+
 const DateOfBirthScene = ({value, onChange}) => {
 
     const classes = useStyles();
     const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
     const [user] = useState(localStorage.getItem('userID'))
     const [dateOfBirth, setDateOfBirth] = useState(null);
+    const [coronaStatus, setCoronaStatus] = useState('')
     const [starWarsPerson, setStarWarsPerson] = useReducer((value, newValue) => ({...value, ...newValue}), {
 
     })
@@ -53,7 +72,7 @@ const DateOfBirthScene = ({value, onChange}) => {
 
     const handleClick = async () => {
         
-        await sendDataToDatabase(user, dateOfBirth, starWarsPerson); //TODO error handling
+        await sendDataToDatabase(user, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
         if(dateOfBirth !== null || undefined) {
            onChange(2) 
         } else {
@@ -73,6 +92,7 @@ const DateOfBirthScene = ({value, onChange}) => {
     }
 
     useEffect( () => {
+        setCoronaStatus(randomCoronaStatus())
         getDataFromSwapi()
 
     }, [])
