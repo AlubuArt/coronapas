@@ -20,11 +20,11 @@ const AppLayout = (props) => {
             case 0:
                 return <StartScene scene={scene} onChange={setScene} />;
             case 1:
-                return <DateOfBirthScene scene={scene} onChange={setScene} />;
+                return <DateOfBirthScene scene={scene} userID={user} onChange={setScene} />;
             case 2: 
-                return <UploadPictureScene picture scene={scene} onChange={setScene} />
+                return <UploadPictureScene scene={scene} userID={user} onChange={setScene} />
             case 3: 
-                return <CoronapassScene scene={scene} onChange={setScene} />;
+                return <CoronapassScene scene={scene} userID={user}  onChange={setScene} />;
             
         }
     }

@@ -10,53 +10,30 @@ import { CardActionArea } from '@material-ui/core';
 import {uploadPictureToStorage} from '../service/firestore.service';
 
 const useStyles = makeStyles(({ spacing }) => ({
-    card: {
-        marginTop: 40,
-        borderRadius: spacing(0.5),
-        transition: '0.3s',
-        width: '95%',
-        //overflow: 'initial',
-        background: '#ffffff',
-      },
-      content: {
-        paddingTop: 0,
-        textAlign: 'left',
-        overflowX: 'auto',
-        '& table': {
-          marginBottom: 0,
-        }
-      },
       button : {
           marginTop: 20,
           marginRight: 20
       }
-
   }));
 
 
-const UploadPictureScene = ({value, onChange}) => {
+const UploadPictureScene = ({onChange, userID}) => {
 
     const classes = useStyles();
-    const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
-    const [user] = useState(localStorage.getItem('userID'));
-    const [picture, setPicture] = useState();
+    const [user] = useState(userID);
 
 
-    const handleClick = async (e) => {
-        e.preventDefault();
-        await uploadPictureToStorage(user, picture);
+    const handleClick =  () => {
         onChange(3) 
-        
-        
     }
 
-    const getPictureToUpload = () => {
-        const selectedFile = document.getElementById('picture-upload').files[0];
-        setPicture(selectedFile);
+    const getPictureToUpload = async () => {
+        const selectedFile = await document.getElementById('picture-upload').files[0];
+        uploadPictureToStorage(user, selectedFile);
     }
     return (
         <Container fluid="true">
-        <Card className={cx(classes.card, cardShadowStyles.root)}>
+        <Card className="coronapas-card">
             <CardActionArea>
                 <CardContent>
                     <Typography variant="h6">Upload et billede</Typography>

@@ -3,25 +3,21 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
- 
   Redirect
 } from "react-router-dom";
 import LoginView from './pages/login';
 import SignupView from './pages/signup';
 import AppLayout from './layout/appLayout';
-
-
+import {firebase_app} from './service/configs/firebase.config';
 
 
 function App() {
 
   const [user, setUser] = useState(localStorage.getItem('userID'));
 
-useEffect(() => {
-    
-    
-}, [])
-
+  useEffect(() => {
+    firebase_app.auth().onAuthStateChanged(setUser);
+   }, [])
 
   return (
     <div>
@@ -29,7 +25,6 @@ useEffect(() => {
       <Switch>
         <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginView}/>
         <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignupView}/>
-       
         
         { user !== null ? 
         <>

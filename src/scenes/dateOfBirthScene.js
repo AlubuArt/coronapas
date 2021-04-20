@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import {Container, Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
@@ -8,7 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import {setDateOfBirthInDatabase} from '../service/firestore.service';
+import {sendDataToDatabase} from '../service/firestore.service';
+import {getPersonSwapi} from '../service/swapi.service'
 
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -35,17 +36,42 @@ const useStyles = makeStyles(({ spacing }) => ({
 
   }));
 
+const randomNumber = () => {
+       return Math.floor((Math.random() * 82) + 1);
+}
 
-const DateOfBirthScene = ({value, onChange}) => {
+const randomCoronaStatus = () => {
+   let n = Math.floor((Math.random() * 5) + 1);
+   // eslint-disable-next-line default-case
+   switch(n) {
+       case 1:
+           return "Vaccinated"
+       case 2:
+           return "Immune to Corona"
+        case 3:
+            return "Contagious"
+        case 4: 
+            return "Had Corona already"
+        case 5: 
+            return "Negative test"
+   }
+        
+}
+
+const DateOfBirthScene = ({onChange, userID}) => {
 
     const classes = useStyles();
     const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
-    const [user] = useState(localStorage.getItem('userID'))
+    const [user] = useState(userID)
     const [dateOfBirth, setDateOfBirth] = useState(null);
+    const [coronaStatus, setCoronaStatus] = useState('')
+    const [starWarsPerson, setStarWarsPerson] = useReducer((value, newValue) => ({...value, ...newValue}), {
 
+    })
 
     const handleClick = async () => {
-        await setDateOfBirthInDatabase(user, dateOfBirth);
+        
+        await sendDataToDatabase(user, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
         if(dateOfBirth !== null || undefined) {
            onChange(2) 
         } else {
@@ -53,6 +79,22 @@ const DateOfBirthScene = ({value, onChange}) => {
         }
         
     }
+
+    const getDataFromSwapi = async () => {
+           const data =  await getPersonSwapi(randomNumber()); 
+           for (let [key, val] of Object.entries(data)) {
+            setStarWarsPerson({[key]: val})
+            }     
+
+    }
+
+    useEffect( () => {
+        setCoronaStatus(randomCoronaStatus())
+        getDataFromSwapi()
+
+    }, [])
+
+
     return (
         <Container fluid="true">
         <Card className={cx(classes.card, cardShadowStyles.root)}>
