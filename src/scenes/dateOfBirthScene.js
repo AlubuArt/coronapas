@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import {sendDataToDatabase} from '../service/firestore.service';
-import {getPersonSwapi} from '../service/swapi.service'
+import {getPersonSwapi} from '../service/swapi.service';
+import CardTitle from '../components/cardTitle';
 
 
 const useStyles = makeStyles(() => ({
@@ -79,11 +80,13 @@ const DateOfBirthScene = ({onChange, userID}) => {
 
 
     return (
-        <Container fluid="true">
-        <Card className="coronapas-card">
+        <Container className="coronapas-container" fluid="true">
+        <Card className="card-container">
             <CardActionArea>
                 <CardContent>
-                    <Typography variant="h6">Indtast din fødselsdato</Typography>
+                <CardTitle  
+                        text="Enter the date of your birth"
+                />
                     <TextField 
                         className="form-control"
                         type="number"

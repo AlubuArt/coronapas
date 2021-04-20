@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import {uploadPictureToStorage} from '../service/firestore.service';
+import CardTitle from '../components/cardTitle';
 
 const useStyles = makeStyles(({ spacing }) => ({
       button : {
@@ -31,12 +32,14 @@ const UploadPictureScene = ({onChange, userID}) => {
         uploadPictureToStorage(user, selectedFile);
     }
     return (
-        <Container fluid="true">
-        <Card className="coronapas-card">
+        <Container className="coronapas-container" fluid="true">
+        <Card className="card-container">
             <CardActionArea>
                 <CardContent>
-                    <Typography variant="h6">Upload et billede</Typography>
-                    <Input id="picture-upload" className="pencil" type="file" onChange={getPictureToUpload} />
+                <CardTitle  
+                    text="A picure provide you must"
+                />
+                <Input id="picture-upload" className="pencil" type="file" onChange={getPictureToUpload} />
                     
                     <div>
                         <Button onClick={handleClick} variant="contained" className={cx(classes.button)}>Next</Button>
