@@ -25,7 +25,6 @@ function App() {
       <Switch>
         <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginView}/>
         <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignupView}/>
-       
         
         { user !== null ? 
         <>

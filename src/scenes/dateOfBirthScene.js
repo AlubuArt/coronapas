@@ -58,17 +58,16 @@ const randomCoronaStatus = () => {
         
 }
 
-const DateOfBirthScene = ({value, onChange}) => {
+const DateOfBirthScene = ({onChange, userID}) => {
 
     const classes = useStyles();
     const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
-    const [user] = useState(localStorage.getItem('userID'))
+    const [user] = useState(userID)
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [coronaStatus, setCoronaStatus] = useState('')
     const [starWarsPerson, setStarWarsPerson] = useReducer((value, newValue) => ({...value, ...newValue}), {
 
     })
-
 
     const handleClick = async () => {
         
@@ -80,8 +79,6 @@ const DateOfBirthScene = ({value, onChange}) => {
         }
         
     }
-
-   
 
     const getDataFromSwapi = async () => {
            const data =  await getPersonSwapi(randomNumber()); 

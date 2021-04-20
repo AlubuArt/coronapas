@@ -44,6 +44,7 @@ export const getUserDataFromDatabase = async (user) => {
     let ref = coll.doc(user);
     await ref.get().then((doc) => {
         data = doc.data();
+        return 
     })
     return data;
 
@@ -67,6 +68,7 @@ export const uploadPictureToStorage = async (user, picture) => {
       })
         
     })
+    
 
     return
     

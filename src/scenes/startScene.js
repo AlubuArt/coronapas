@@ -37,7 +37,7 @@ const useStyles = makeStyles(({ spacing }) => ({
   }));
 
 
-const StartScene = ({value, onChange}) => {
+const StartScene = ({scene, onChange}) => {
 
     const classes = useStyles();
     const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });

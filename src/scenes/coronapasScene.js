@@ -19,29 +19,32 @@ const useStyles = makeStyles(({ spacing }) => ({
 
   }));
 
-const CoronapassScene = () => {
+const CoronapassScene = ({userID}) => {
 
     const classes = useStyles();
     const [coronapasData, setCoronapasData] = useReducer((value, newValue) => ({...value, ...newValue}), {
+        picture: ''
         
     })
-    const [user] = useState(localStorage.getItem('userID'));
+    const [user] = useState(userID);
     const [homeworldName, setHomeworldName] = useState('');
-    const [picture, setPicture] = useState('');
+    const [picture, setPicture] = useState()
     const [qr, setQr] = useState(QR)
 
 
     const getCoronapasData = async () => {
         try {
             const data =  await getUserDataFromDatabase(user);
-            setPicture(data.picture)
             for (let [key, val] of Object.entries(data)) {
                 setCoronapasData({[key]: val})
             }
+
+          
         } catch {}
-       
-       
+
+        
     }
+
 
     const getHomeWorld = async () => {
         try {
@@ -51,21 +54,18 @@ const CoronapassScene = () => {
         
     }
 
-
     useEffect(() => {
+        getCoronapasData()
         
-        const timer = setTimeout(() => {
-          getCoronapasData()  
-          }, 1000);/*  */
-          return  () => clearTimeout(timer); 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    },[])
 
 
     useEffect(() => {
         getHomeWorld()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [coronapasData])
+
+    
 
     return (
         <Container className="coronapas-container">
@@ -75,7 +75,7 @@ const CoronapassScene = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={6}>
                             <div>
-                                <img className={classes.img} alt="jhon" src={picture}></img> 
+                                <img className={classes.img} alt="jhon" src={coronapasData.picture}></img> 
                             </div>
                             </Grid>
                             <Grid className="card-title" item xs={6}>
