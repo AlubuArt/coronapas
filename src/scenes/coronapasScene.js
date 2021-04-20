@@ -9,6 +9,10 @@ import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import './coronapas.scss';
 import QR from '../images/qrcode.png';
+import CoronapasHeader from '../components/coronapas/coronapasHeader';
+import CoronapasBody from '../components/coronapas/coronapasBody';
+import CoronpasStatus from '../components/coronapas/coronapasStatus';
+import QrCode from '../components/coronapas/qrCode';
 
 
 const useStyles = makeStyles(() => ({
@@ -66,77 +70,28 @@ const CoronapassScene = ({userID}) => {
             <Card className="coronapas-card">
                 <CardActionArea>
                     <CardContent >
-                        <Grid container spacing={3}>
-                            <Grid item xs={6}>
-                            <div>
-                                <img className={classes.img} alt="jhon" src={coronapasData.picture}></img> 
-                            </div>
-                            </Grid>
-                            <Grid className="card-title" item xs={6}>
-                                <h1>{coronapasData.name}</h1>
-                            </Grid>
-                        </Grid>
-                        <Grid >
-                            <Grid container spacing={2}>
-                                <Grid  item xs={4}>
-                                  <h4 >Date of Birth</h4>
-                                  <p >{coronapasData.dateOfBirth}</p>    
-                                </Grid>
-                                <Grid item xs={4}>
-                                  <h4>Worldhome</h4>
-                                  <p>{homeworldName}</p>    
-                                </Grid>
-                                                             
-                            </Grid>
-                    
-                            <Grid container spacing={2}>
-                                <Grid  item xs={4}>
-                                    <h4 >Gender</h4>
-                                        <p >{coronapasData.gender}</p>  
-                                    </Grid>
-                                <Grid  item xs={4}>
-                                  <h4>Height</h4>
-                                  <p>{coronapasData.height}</p>    
-                                </Grid>
-                                <Grid  item xs={4}>
-                                   <h4>Mass</h4>
-                                    <p>{coronapasData.mass}</p>  
-                                </Grid>
-                                
-                            </Grid>
-                            <Grid container spacing={2}>
-                                <Grid item xs={4}>
-                                  <h4>Skin Color</h4>
-                                  <p>{coronapasData.skinColor}</p>    
-                                </Grid>
-                                <Grid item xs={4}>
-                                  <h4 >Eye Color</h4>
-                                  <p >{coronapasData.eyeColor}</p>    
-                                </Grid>
-                                <Grid item xs={4}>
-                                   <h4>Hair Color</h4>
-                                    <p>{coronapasData.hairColor}</p>  
-                                </Grid>
-                                
-                            </Grid>
-                        </Grid>
-                        <CardContent>
-                           <Grid className="banner"item xs={12}>
-                                <div>{coronapasData.coronaStatus}</div>
-                            </Grid>
-                            <Grid div className="qr-code">
-                                <img alt="qr" src={qr} />
-                            </Grid> 
-                        </CardContent>
+                        <CoronapasHeader 
+                            name={coronapasData.name}
+                            picture={coronapasData.picture}
+                            style={classes.img}
+                        />
+
+                        <CoronapasBody 
+                            data={coronapasData}
+                            homeworldName={homeworldName}
+                        />
+
+                        <CoronpasStatus 
+                            status={coronapasData.coronaStatus}
+                        />
+
+                        <QrCode 
+                            code={qr}
+                        />
                         
-                
                     </CardContent>
                 </CardActionArea>
             </Card> 
-            <Grid className="pdf-button">
-               <Button variant="contained">Gem som PDF</Button> 
-            </Grid>
-            
         </Container>
        
     )
