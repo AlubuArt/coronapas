@@ -2,7 +2,9 @@
 
 Få genereret dit nye coronapas som kan bruges i hele galaksen! Så du kan komme på ferie på Tatooine, Yavin VI, Endor m.m.
 
-![Skærmbillede 2021-04-20 kl  21 17 26](https://user-images.githubusercontent.com/57637214/115451709-d4a0ee80-a21d-11eb-9e03-ecf56b982b30.png)![Skærmbillede 2021-04-20 kl  21 25 35](https://user-images.githubusercontent.com/57637214/115452658-fe0e4a00-a21e-11eb-95ca-66bc98ff615a.png)
+![Skærmbillede 2021-04-20 kl  21 17 26](https://user-images.githubusercontent.com/57637214/115451709-d4a0ee80-a21d-11eb-9e03-ecf56b982b30.png)
+
+![Skærmbillede 2021-04-20 kl  21 25 35](https://user-images.githubusercontent.com/57637214/115452658-fe0e4a00-a21e-11eb-95ca-66bc98ff615a.png)
 
 
 
