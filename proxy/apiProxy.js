@@ -27,6 +27,46 @@ axios(config)
 })
 
 
+router.get("/planets", async (req, res) => {
+
+    let config = {
+        method: 'get',
+        url: `https://swapi.dev/api/planets/${req}`,
+    }
+
+axios(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+  console.log(response.data)
+  res.send(response.data)
+  
+})
+.catch((error) => {
+  console.log(error);
+});
+
+})
+
+router.get("/films", async (req, res) => {
+
+    let config = {
+        method: 'get',
+        url: `https://swapi.dev/api/films/${req}`,
+    }
+
+axios(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+  console.log(response.data)
+  res.send(response.data)
+  
+})
+.catch((error) => {
+  console.log(error);
+});
+
+})
+
 app.listen(port, () => {
     console.log(`helloworld: listening on port ${port}!`)
 })

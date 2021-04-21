@@ -74,6 +74,8 @@ export const uploadPictureToStorage = async (user, picture) => {
     
 }
 
+
+
 const addFileToUserProfile = (user, URLToFile) => {
     const ref = coll.doc(user);
     ref.set({

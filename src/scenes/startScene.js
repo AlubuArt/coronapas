@@ -10,20 +10,19 @@ import CardTitle from '../components/cardTitle';
 const StartScene = ({onChange}) => {
 
 
-    const handleClick = () => {
-        onChange(1)
-    }
-
+    
     return (
-        <Container className="coronapas-container" fluid="true">
+        <Container className="coronapas-container" fluid>
             <Card className="card-container">
                 <CardActionArea>
                     <CardContent>
                         <CardTitle  
                             text="Your journey here begins"
                         />
-                     
-                        <Button onClick={() => handleClick()} variant="contained">Start</Button>
+                     <div>
+                        <Button onClick={() => onChange(1)} variant="contained">Start</Button> 
+                     </div>
+                        
                     </CardContent>
                 </CardActionArea>
             </Card>
