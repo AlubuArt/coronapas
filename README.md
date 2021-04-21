@@ -34,7 +34,7 @@ Material-ui
 
 Sass
 
-React-Pdf
+
 
 
 ## API proxy
