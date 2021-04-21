@@ -14,8 +14,6 @@ Besøg applikationen med din smartphone her: https://coronapas-b0c6c.web.app
 
 ![image](https://user-images.githubusercontent.com/57637214/115185276-ce0c5d00-a0df-11eb-8e36-d39ef86d6331.png)
 
-
-
 1. Opret en ny bruger, med email og password
 2. Opret nyt coronapas ved at oplyse fødselsdato og upload et billede af dig selv.
 3. Når dit nye pas er klar, kan du finde det i applikationen, hvor du også kan downloade det som pdf.
@@ -38,6 +36,13 @@ Sass
 
 React-Pdf
 
+
+## API proxy
+
+Til denne applikation bliver der udviklet en api proxy server, som skal håndtere kald til Swapi API. 
+
+Swapi API Proxy kan findes på dette repository: https://github.com/AlubuArt/swapiProxy
+
 ## Product Backlog
 
 Logout function
@@ -46,6 +51,6 @@ Bottom navigation
 
 Download PDF with PDF-reader
 
-API Proxy server for API calls
+Installing API Proxy server for API calls on Google Cloud 
 
 More Star Wars Styling!!
