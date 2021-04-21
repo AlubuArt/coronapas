@@ -51,7 +51,7 @@ const SignupView = ({history}) => {
     }
 
     return (
-        <Container className="coronapas-container" fluid="true">
+        <Container className="coronapas-container" fluid>
                 <Card className="card-container">
                     <CardActionArea>
                         <CardContent>

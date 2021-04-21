@@ -9,6 +9,7 @@ import { CardActionArea } from '@material-ui/core';
 import {uploadPictureToStorage} from '../service/firestore.service';
 import CardTitle from '../components/cardTitle';
 
+
 const useStyles = makeStyles(({ spacing }) => ({
       button : {
           marginTop: 20,
@@ -23,13 +24,15 @@ const UploadPictureScene = ({onChange, userID}) => {
     const [user] = useState(userID);
 
 
-    const handleClick =  () => {
+    const handleClick =  async () => {
+        await 
         onChange(3) 
     }
 
     const getPictureToUpload = async () => {
         const selectedFile = await document.getElementById('picture-upload').files[0];
         uploadPictureToStorage(user, selectedFile);
+       
     }
     return (
         <Container className="coronapas-container" fluid="true">

@@ -20,7 +20,7 @@ function App() {
    }, [])
 
   return (
-    <div>
+    
     <Router basename="/">
       <Switch>
         <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginView}/>
@@ -40,7 +40,7 @@ function App() {
         }
       </Switch>
     </Router>
-    </div>
+    
   );
 }
 

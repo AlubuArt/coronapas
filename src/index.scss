@@ -12,3 +12,10 @@ code {
     monospace;
 }
 
+@font-face {
+  font-family: 'starjedihollow' ;
+  src: local('starjedihollow'),
+  url('./fonts/starjhol-webfont.woff') format("woff");
+  font-weight: normal;
+}
+
