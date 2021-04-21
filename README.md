@@ -41,6 +41,8 @@ React-Pdf
 
 Til denne applikation bliver der udviklet en api proxy server, som skal håndtere kald til Swapi API. 
 
+Proxy serveren bliver endnu ikke brugt af Coronapas applikationen
+
 Swapi API Proxy kan findes på dette repository: https://github.com/AlubuArt/swapiProxy
 
 ## Product Backlog
