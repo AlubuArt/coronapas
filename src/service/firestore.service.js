@@ -15,6 +15,8 @@ export const checkIfUserHasPass = async (user) => {
     await ref.get().then((doc) => {
         if(doc.data().picture) {
             result = true;
+        } else {
+            result = false;
         }
     })
     return result  

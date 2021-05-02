@@ -20,7 +20,7 @@ const StartScene = ({history}) => {
     }
 
     useEffect( () => {
-
+        
         async function userHasCoronaPass() {
             let result = await checkIfUserHasPass(userID);
             if(result === true) {
