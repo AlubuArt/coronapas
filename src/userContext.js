@@ -4,7 +4,7 @@ import React, {useState} from "react";
 export const UserContext = React.createContext();
 
 
-const UserProvider = ({children}) => {
+export const UserProvider = ({children}) => {
   const [userID, setUserID] = useState('');
   
   const setUser = (userID) => {
@@ -16,7 +16,9 @@ const UserProvider = ({children}) => {
     {children}
     </UserContext.Provider>
   )
+
 }
 
 
-export default UserProvider;
+
+

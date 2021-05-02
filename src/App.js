@@ -18,7 +18,7 @@ import {UserContext} from './userContext';
 function App() {
 
   const {userID, setUser} = useContext(UserContext);
-  
+
   useEffect(() => {
     firebase_app.auth().onAuthStateChanged(function(user) {
       if(user) {
@@ -27,7 +27,9 @@ function App() {
         setUser('');
       }
     });
-   },[setUser])
+   },[setUser]) 
+
+  
 
   return (
     
@@ -38,10 +40,10 @@ function App() {
         
         { userID !== null ? 
 
-        
         <>
+        
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
-            return (<Redirect to={`${process.env.PUBLIC_URL}/start`}/>)
+            return (<Redirect to={`${process.env.PUBLIC_URL}/start`} />)
             
           }} />
           <Route path={`${process.env.PUBLIC_URL}/start`} component={StartScene} />
@@ -51,8 +53,10 @@ function App() {
 
         </>
         : 
+          
 
         <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+        
         }
       </Switch>
     </Router>

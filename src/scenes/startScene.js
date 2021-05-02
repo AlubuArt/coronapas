@@ -21,7 +21,7 @@ const StartScene = ({history}) => {
 
     useEffect( () => {
         
-        async function userHasCoronaPass() {
+       const userHasCoronaPass = async() =>{
             let result = await checkIfUserHasPass(userID);
             if(result === true) {
                 history.push(`${process.env.PUBLIC_URL}/coronapas`);

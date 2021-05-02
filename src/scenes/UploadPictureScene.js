@@ -33,8 +33,8 @@ const UploadPictureScene = ({history}) => {
     const getPictureToUpload = async () => {
         const selectedFile = await document.getElementById('picture-upload').files[0];
         uploadPictureToStorage(userID, selectedFile);
-       
     }
+    
     return (
         <Container className="coronapas-container" fluid="true">
         <Card className="card-container">

@@ -21,7 +21,6 @@ const useStyles = makeStyles(({ spacing }) => ({
       }
   }));
 
-
 const LoginView = ({ history }) => {
 
     const classes = useStyles();

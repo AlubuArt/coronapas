@@ -54,27 +54,10 @@ export const getUserDataFromDatabase = async (user) => {
 }
 
 export const uploadPictureToStorage = async (user, picture) => {
-    let upload = storageRef.child('userPictures/' + picture.name).put(picture);
-    
-    upload.on('state_changed', (snapshot) => {
-        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-    },
-    (error) => {
-        //handle errors
-    },
-    () => {
+    let upload = await storageRef.child('userPictures/' + picture.name).put(picture);
     upload.snapshot.ref.getDownloadURL().then((URLToFile) => {
-          
           addFileToUserProfile(user, URLToFile);
-          
       })
-        
-    })
-    
-
-    return
-    
 }
 
 
