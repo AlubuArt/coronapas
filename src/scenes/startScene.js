@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect} from 'react';
 import {Container} from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,6 +7,7 @@ import { CardActionArea } from '@material-ui/core';
 import CardTitle from '../components/cardTitle';
 import { withRouter } from 'react-router';
 import {UserContext} from '../userContext';
+import { checkIfUserHasPass} from '../service/firestore.service'
 
 
 
@@ -17,6 +18,23 @@ const StartScene = ({history}) => {
     const handleClick = () => {
         history.push(`${process.env.PUBLIC_URL}/dob`);
     }
+
+    useEffect( () => {
+
+        const userHasCoronaPass = async () => {
+            let result = await checkIfUserHasPass(userID);
+            if(result === true) {
+                history.push(`${process.env.PUBLIC_URL}/coronapas`);
+            } else {
+                
+            }
+        }
+        userHasCoronaPass()
+        return () => {
+            console.log('cleaned up')
+        }
+
+    },[userID, history])
     
     return (
         <Container className="coronapas-container" fluid>

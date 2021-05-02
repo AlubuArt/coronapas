@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import {login} from '../service/login.service';
-import {CardHeader, Container} from '@material-ui/core'
+import {Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
@@ -27,7 +27,7 @@ const LoginView = ({ history }) => {
     const classes = useStyles();
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
-    const  {setUser}  = useContext(UserContext);
+    const {setUser}  = useContext(UserContext);
 
     const loginUser = async () => {
         try {
@@ -52,7 +52,6 @@ const LoginView = ({ history }) => {
                             <CardTitle  
                                 text="Create your coronapas now"
                             />
-                            
                             <TextField
                                 className="form-control"
                                 type="email"

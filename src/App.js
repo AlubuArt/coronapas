@@ -38,6 +38,8 @@ function App() {
         <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignupView}/>
         
         { userID !== null ? 
+
+        
         <>
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
             return (<Redirect to={`${process.env.PUBLIC_URL}/start`}/>)
@@ -50,6 +52,7 @@ function App() {
 
         </>
         : 
+
         <Redirect to={`${process.env.PUBLIC_URL}/login`} />
         }
       </Switch>
