@@ -17,12 +17,18 @@ import {UserContext} from './userContext';
 
 function App() {
 
-  const {userID} = useContext(UserContext);
-  const [user, setUser] = useState('')
+  const {userID, setUser} = useContext(UserContext);
+  //const [user, setUser] = useState('')
 
   useEffect(() => {
-    firebase_app.auth().onAuthStateChanged(setUser);
-   }, [userID])
+    firebase_app.auth().onAuthStateChanged(function(user) {
+      if(user) {
+        setUser(user.uid);
+      } else {
+        setUser('');
+      }
+    });
+   },[setUser])
 
   return (
     
@@ -31,7 +37,7 @@ function App() {
         <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginView}/>
         <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignupView}/>
         
-        { userID !== '' ? 
+        { userID !== null ? 
         <>
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
             return (<Redirect to={`${process.env.PUBLIC_URL}/start`}/>)
