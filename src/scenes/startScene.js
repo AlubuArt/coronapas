@@ -1,15 +1,35 @@
-import React from 'react';
-import {Container, Typography} from '@material-ui/core';
+import React, { useContext, useEffect} from 'react';
+import {Container} from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import CardTitle from '../components/cardTitle';
+import { withRouter } from 'react-router';
+import {UserContext} from '../userContext';
+import { checkIfUserHasPass} from '../service/firestore.service'
 
 
-const StartScene = ({onChange}) => {
 
+const StartScene = ({history}) => {
 
+    const {userID} = useContext(UserContext);
+
+    const handleClick = () => {
+        history.push(`${process.env.PUBLIC_URL}/dob`);
+    }
+
+    useEffect( () => {
+        
+       const userHasCoronaPass = async() =>{
+            let result = await checkIfUserHasPass(userID);
+            if(result === true) {
+                history.push(`${process.env.PUBLIC_URL}/coronapas`);
+            } else {}
+        }
+        userHasCoronaPass()
+    
+    },[userID, history])
     
     return (
         <Container className="coronapas-container" fluid>
@@ -20,7 +40,7 @@ const StartScene = ({onChange}) => {
                             text="Your journey here begins"
                         />
                      <div>
-                        <Button onClick={() => onChange(1)} variant="contained">Start</Button> 
+                        <Button onClick={() => handleClick()} variant="contained">Start</Button> 
                      </div>
                         
                     </CardContent>
@@ -31,4 +51,4 @@ const StartScene = ({onChange}) => {
 
 }
 
-export default StartScene;
+export default withRouter(StartScene);

@@ -15,13 +15,15 @@ export const checkIfUserHasPass = async (user) => {
     await ref.get().then((doc) => {
         if(doc.data().picture) {
             result = true;
+        } else {
+            result = false;
         }
     })
     return result  
 }
 
 export const sendDataToDatabase = async (user, dob, data, status) => {
-    const ref = coll.doc(user);
+    let ref = coll.doc(user);
     ref.set({
         dateOfBirth: dob,
         name: data.name,
@@ -46,38 +48,22 @@ export const getUserDataFromDatabase = async (user) => {
         data = doc.data();
         return 
     })
+    
     return data;
 
 }
 
 export const uploadPictureToStorage = async (user, picture) => {
-    let upload = storageRef.child('userPictures/' + picture.name).put(picture);
-    
-    upload.on('state_changed', (snapshot) => {
-        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-    },
-    (error) => {
-        //handle errors
-    },
-    () => {
+    let upload = await storageRef.child('userPictures/' + picture.name).put(picture);
     upload.snapshot.ref.getDownloadURL().then((URLToFile) => {
-          
           addFileToUserProfile(user, URLToFile);
-          
       })
-        
-    })
-    
-
-    return
-    
 }
 
 
 
 const addFileToUserProfile = (user, URLToFile) => {
-    const ref = coll.doc(user);
+    let ref = coll.doc(user);
     ref.set({
       picture: URLToFile
   

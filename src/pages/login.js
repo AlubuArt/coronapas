@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {login} from '../service/login.service';
-import {CardHeader, Container} from '@material-ui/core'
+import {Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
@@ -10,6 +10,7 @@ import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { withRouter } from 'react-router';
 import CardTitle from '../components/cardTitle';
+import {UserContext} from '../userContext';
 
 const useStyles = makeStyles(({ spacing }) => ({
       button : {
@@ -20,16 +21,17 @@ const useStyles = makeStyles(({ spacing }) => ({
       }
   }));
 
-
 const LoginView = ({ history }) => {
 
     const classes = useStyles();
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
+    const {setUser}  = useContext(UserContext);
 
     const loginUser = async () => {
         try {
-           await login(email, pass); 
+           const userID = await login(email, pass); 
+           setUser(userID)
            history.push(`${process.env.PUBLIC_URL}/start`)
         } catch (error) {
             console.log(error);
@@ -37,7 +39,7 @@ const LoginView = ({ history }) => {
        
     }
 
-    const signup = async () => {
+    const signup = () => {
         history.push(`${process.env.PUBLIC_URL}/signup`)
     }
 
@@ -49,7 +51,6 @@ const LoginView = ({ history }) => {
                             <CardTitle  
                                 text="Create your coronapas now"
                             />
-                            
                             <TextField
                                 className="form-control"
                                 type="email"

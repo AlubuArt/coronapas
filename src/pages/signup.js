@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,7 @@ import { withRouter } from 'react-router';
 import {makeNewUser }from '../service/signup.service';
 import {firebase_app} from '../service/configs/firebase.config';
 import CardTilte from '../components/cardTitle';
+import {UserContext} from '../userContext';
 
 const useStyles = makeStyles(({ spacing }) => ({
     
@@ -30,11 +31,13 @@ const SignupView = ({history}) => {
     const classes = useStyles();
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
+    const {setUser} = useContext(UserContext);
 
 
     const newUser = async () => {
         try{
-            await makeNewUser(email, pass);
+            const id = await makeNewUser(email, pass);
+            setUser(id);
             handleRedirectOnSuccess();
         } catch (error) {
             console.log(error)

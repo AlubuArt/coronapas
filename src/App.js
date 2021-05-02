@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,17 +7,29 @@ import {
 } from "react-router-dom";
 import LoginView from './pages/login';
 import SignupView from './pages/signup';
-import AppLayout from './layout/appLayout';
+import StartScene from './scenes/startScene';
+import DateOfBirthScene from './scenes/dateOfBirthScene';
+import UploadPictureScene from './scenes/UploadPictureScene';
+import CoronapasScene from './scenes/coronapasScene';
 import {firebase_app} from './service/configs/firebase.config';
+import {UserContext} from './userContext';
 
 
 function App() {
 
-  const [user, setUser] = useState(localStorage.getItem('userID'));
+  const {userID, setUser} = useContext(UserContext);
 
   useEffect(() => {
-    firebase_app.auth().onAuthStateChanged(setUser);
-   }, [])
+    firebase_app.auth().onAuthStateChanged(function(user) {
+      if(user) {
+        setUser(user.uid);
+      } else {
+        setUser('');
+      }
+    });
+   },[setUser]) 
+
+  
 
   return (
     
@@ -26,17 +38,25 @@ function App() {
         <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginView}/>
         <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignupView}/>
         
-        { user !== null ? 
+        { userID !== null ? 
+
         <>
+        
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
-            return (<Redirect to={`${process.env.PUBLIC_URL}/start`}/>)
+            return (<Redirect to={`${process.env.PUBLIC_URL}/start`} />)
             
           }} />
+          <Route path={`${process.env.PUBLIC_URL}/start`} component={StartScene} />
+          <Route path={`${process.env.PUBLIC_URL}/dob`} component={DateOfBirthScene} />
+          <Route path={`${process.env.PUBLIC_URL}/upload`} component={UploadPictureScene} />
+          <Route path={`${process.env.PUBLIC_URL}/coronapas`} component={CoronapasScene} />
 
-          <Route path={`${process.env.PUBLIC_URL}/start`} render={() =><AppLayout scene={0}/>}/>
         </>
         : 
+          
+
         <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+        
         }
       </Switch>
     </Router>

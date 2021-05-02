@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useReducer} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {getUserDataFromDatabase} from '../service/firestore.service';
 import {getHomeWorldFromSwapi} from '../service/swapi.service';
 import {Container} from '@material-ui/core'
@@ -12,7 +12,10 @@ import CoronapasHeader from '../components/coronapas/coronapasHeader';
 import CoronapasBody from '../components/coronapas/coronapasBody';
 import CoronpasStatus from '../components/coronapas/coronapasStatus';
 import QrCode from '../components/coronapas/qrCode';
-
+import {UserContext }from '../userContext';
+import { withRouter } from 'react-router';
+import {logout} from '../service/login.service';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(() => ({
     
@@ -22,43 +25,45 @@ const useStyles = makeStyles(() => ({
 
   }));
 
-const CoronapassScene = ({userID}) => {
+const CoronapasScene = ({history}) => {
 
     const classes = useStyles();
-    const [user] = useState(userID);
+    const {userID} = useContext(UserContext);
     const [homeworldName, setHomeworldName] = useState('');
-    const [qr] = useState(QR)
-    const [coronapasData, setCoronapasData] = useReducer((value, newValue) => ({...value, ...newValue}), {
-            picture: ''
-            
-        })
-
-    const getCoronapasData = async () => {
-        try {
-            const data =  await getUserDataFromDatabase(user);
-            for (let [key, val] of Object.entries(data)) {
-                setCoronapasData({[key]: val})
-            }
-        } catch {}
-    }
+    const [qr] = useState(QR);
+    const [coronapasData, setCoronapasData] = useState('');
 
 
-    const getHomeWorld = async () => {
-        try {
-            const hw = await getHomeWorldFromSwapi(coronapasData);
-            setHomeworldName(hw);
-        } catch (error) {}
+    const handleClick = async () => {
+        await logout();
+        history.push(`${process.env.PUBLIC_URL}/login`)
     }
 
     useEffect(() => {
-        getCoronapasData()   
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+        const getCoronapasData = async () => {
+            try {
+                const data =  await getUserDataFromDatabase(userID);
+                for (let [key, val] of Object.entries(data)) {
+                    setCoronapasData(prevState => ({
+                        ...prevState,
+                        [key]: val
+                    }))
+                }
+            } catch {}
+        }
+        getCoronapasData()      
+    },[userID])
 
 
     useEffect(() => {
+        const getHomeWorld = async () => {
+            try {
+                const hw = await getHomeWorldFromSwapi(coronapasData);
+                setHomeworldName(hw);
+            } catch (error) {}
+        }
         getHomeWorld()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
     }, [coronapasData])
 
     
@@ -89,10 +94,15 @@ const CoronapassScene = ({userID}) => {
                         
                     </CardContent>
                 </CardActionArea>
+                
             </Card> 
+            <div>
+              <Button variant="contained" onClick={() => handleClick()}>Logout</Button>  
+            </div>
+            
         </Container>
        
     )
 }
 
-export default CoronapassScene;
+export default withRouter(CoronapasScene);
