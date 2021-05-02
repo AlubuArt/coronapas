@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import {sendDataToDatabase} from '../service/firestore.service';
 import {getPersonSwapi} from '../service/swapi.service';
 import CardTitle from '../components/cardTitle';
+import { withRouter } from 'react-router';
 
 
 const useStyles = makeStyles(() => ({
@@ -43,21 +44,22 @@ const randomCoronaStatus = () => {
         
 }
 
-const DateOfBirthScene = ({onChange, userID}) => {
+const DateOfBirthScene = ({history}, userID) => {
 
     const classes = useStyles();;
     const [user] = useState(userID)
-    const [dateOfBirth, setDateOfBirth] = useState(null);
+    const [dateOfBirth, setDateOfBirth] = useState('');
     const [coronaStatus, setCoronaStatus] = useState('')
     const [starWarsPerson, setStarWarsPerson] = useReducer((value, newValue) => ({...value, ...newValue}), {
 
     })
 
-    const handleClick = () => {
+    const handleClick = () =>  {
         
         sendDataToDatabase(user, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
-        if(dateOfBirth !== null || undefined) {
-           onChange(2) 
+        if(dateOfBirth !== '' || undefined) {
+            
+            history.push(`${process.env.PUBLIC_URL}/uploadpicture`);
         } else {
             alert("Please input your date of birth before moving on")
         }
@@ -94,8 +96,8 @@ const DateOfBirthScene = ({onChange, userID}) => {
                         value={dateOfBirth}
                         onChange={(e) => setDateOfBirth(e.target.value)}
                     />
-                    <div>
-                        <Button onClick={handleClick} variant="contained" className={cx(classes.button)}>Next</Button>
+                    <div>   
+                        <Button onClick={() => handleClick()} variant="contained" className={cx(classes.button)}>Next</Button>
                     </div>
                 </CardContent>
             </CardActionArea>
@@ -104,4 +106,4 @@ const DateOfBirthScene = ({onChange, userID}) => {
     )
 }
 
-export default DateOfBirthScene;
+export default withRouter(DateOfBirthScene);

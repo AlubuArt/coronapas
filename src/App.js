@@ -7,7 +7,10 @@ import {
 } from "react-router-dom";
 import LoginView from './pages/login';
 import SignupView from './pages/signup';
-import AppLayout from './layout/appLayout';
+import StartScene from './scenes/startScene';
+import DateOfBirthScene from './scenes/dateOfBirthScene';
+import UploadPictureScene from './scenes/UploadPictureScene';
+import CoronapassScene from './scenes/coronapasScene';
 import {firebase_app} from './service/configs/firebase.config';
 
 
@@ -32,8 +35,12 @@ function App() {
             return (<Redirect to={`${process.env.PUBLIC_URL}/start`}/>)
             
           }} />
+          <Route path={`${process.env.PUBLIC_URL}/start`} component={StartScene} />
+          <Route path={`${process.env.PUBLIC_URL}/dob`} component={DateOfBirthScene} />
+          <Route path={`${process.env.PUBLIC_URL}/upload`} component={UploadPictureScene} />
+          <Route path={`${process.env.PUBLIC_URL}/coronapas`} component={CoronapassScene} />
 
-          <Route path={`${process.env.PUBLIC_URL}/start`} render={() =><AppLayout scene={0}/>}/>
+          {/* <Route path={`${process.env.PUBLIC_URL}/start`} render={() =><AppLayout scene={0}/>}/> */}
         </>
         : 
         <Redirect to={`${process.env.PUBLIC_URL}/login`} />

@@ -21,7 +21,7 @@ export const checkIfUserHasPass = async (user) => {
 }
 
 export const sendDataToDatabase = async (user, dob, data, status) => {
-    const ref = coll.doc(user);
+    let ref = coll.doc(user);
     ref.set({
         dateOfBirth: dob,
         name: data.name,
@@ -77,7 +77,7 @@ export const uploadPictureToStorage = async (user, picture) => {
 
 
 const addFileToUserProfile = (user, URLToFile) => {
-    const ref = coll.doc(user);
+    let ref = coll.doc(user);
     ref.set({
       picture: URLToFile
   

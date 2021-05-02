@@ -37,7 +37,7 @@ const LoginView = ({ history }) => {
        
     }
 
-    const signup = async () => {
+    const signup = () => {
         history.push(`${process.env.PUBLIC_URL}/signup`)
     }
 

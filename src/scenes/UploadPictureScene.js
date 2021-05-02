@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Input, Typography} from '@material-ui/core'
+import {Container, Input} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import cx from 'clsx';
@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import {uploadPictureToStorage} from '../service/firestore.service';
 import CardTitle from '../components/cardTitle';
+import { withRouter } from 'react-router';
 
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -18,15 +19,15 @@ const useStyles = makeStyles(({ spacing }) => ({
   }));
 
 
-const UploadPictureScene = ({onChange, userID}) => {
+const UploadPictureScene = ({history}, userID) => {
 
     const classes = useStyles();
     const [user] = useState(userID);
 
 
-    const handleClick =  async () => {
-        await 
-        onChange(3) 
+    const handleClick = () => {
+        console.log("d")
+        history.push(`${process.env.PUBLIC_URL}/coronapas`);
     }
 
     const getPictureToUpload = async () => {
@@ -43,9 +44,8 @@ const UploadPictureScene = ({onChange, userID}) => {
                     text="A picure provide you must"
                 />
                 <Input id="picture-upload" className="pencil" type="file" onChange={getPictureToUpload} />
-                    
                     <div>
-                        <Button onClick={handleClick} variant="contained" className={cx(classes.button)}>Next</Button>
+                        <Button onClick={() => handleClick()} variant="contained" className={cx(classes.button)}>Next</Button>
                     </div>
                 </CardContent>
             </CardActionArea>
@@ -54,4 +54,4 @@ const UploadPictureScene = ({onChange, userID}) => {
     )
 }
 
-export default UploadPictureScene;
+export default withRouter(UploadPictureScene);

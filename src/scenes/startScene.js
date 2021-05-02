@@ -5,11 +5,14 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import CardTitle from '../components/cardTitle';
+import { withRouter } from 'react-router';
 
 
-const StartScene = ({onChange}) => {
+const StartScene = ({history}) => {
 
-
+    const handleClick = () => {
+        history.push(`${process.env.PUBLIC_URL}/dob`);
+    }
     
     return (
         <Container className="coronapas-container" fluid>
@@ -20,7 +23,7 @@ const StartScene = ({onChange}) => {
                             text="Your journey here begins"
                         />
                      <div>
-                        <Button onClick={() => onChange(1)} variant="contained">Start</Button> 
+                        <Button onClick={() => handleClick()} variant="contained">Start</Button> 
                      </div>
                         
                     </CardContent>
@@ -31,4 +34,4 @@ const StartScene = ({onChange}) => {
 
 }
 
-export default StartScene;
+export default withRouter(StartScene);
