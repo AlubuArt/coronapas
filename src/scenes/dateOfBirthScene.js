@@ -47,13 +47,11 @@ const randomCoronaStatus = () => {
 
 const DateOfBirthScene = ({history}) => {
 
-    const classes = useStyles();;
+    const classes = useStyles();
     const {userID} = useContext(UserContext);
     const [dateOfBirth, setDateOfBirth] = useState('');
-    const [coronaStatus, setCoronaStatus] = useState('')
-    const [starWarsPerson, setStarWarsPerson] = useReducer((value, newValue) => ({...value, ...newValue}), {
-
-    })
+    const [coronaStatus, setCoronaStatus] = useState('');
+    const [starWarsPerson, setStarWarsPerson] = useState('');
 
     const handleClick = () =>  {
         
@@ -65,18 +63,21 @@ const DateOfBirthScene = ({history}) => {
         }
         
     }
-
-    const getDataFromSwapi = async () => {
-           const data =  await getPersonSwapi(randomNumber()); 
-           for (let [key, val] of Object.entries(data)) {
-            setStarWarsPerson({[key]: val})
-            }     
-
-    }
-
     useEffect( () => {
         setCoronaStatus(randomCoronaStatus())
-        getDataFromSwapi()
+    },[])
+
+    useEffect( () => {
+        const getDataFromSwapi = async () => {
+            const data =  await getPersonSwapi(randomNumber()); 
+            for (let [key, val] of Object.entries(data)) {
+            setStarWarsPerson(prevState => ({ 
+                    ...prevState, 
+                    [key]: val
+            }))
+                  
+     }}
+     getDataFromSwapi()    
 
     }, [])
 

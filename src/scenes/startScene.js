@@ -21,19 +21,14 @@ const StartScene = ({history}) => {
 
     useEffect( () => {
 
-        const userHasCoronaPass = async () => {
+        async function userHasCoronaPass() {
             let result = await checkIfUserHasPass(userID);
             if(result === true) {
                 history.push(`${process.env.PUBLIC_URL}/coronapas`);
-            } else {
-                
-            }
+            } else {}
         }
         userHasCoronaPass()
-        return () => {
-            console.log('cleaned up')
-        }
-
+    
     },[userID, history])
     
     return (

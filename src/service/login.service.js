@@ -8,3 +8,8 @@ export const login = async (email, pass) => {
     const uid = loggedInUser.user.uid;
     return uid;
 }
+
+export const logout = async () => {
+    await firebase_app.auth().signOut();
+    return 
+}
