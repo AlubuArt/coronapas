@@ -5,10 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './fonts/starjedi-webfont.woff'
 import './fonts/starjhol-webfont.woff'
+import UserProvider from './userContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+     <App /> 
+    </UserProvider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -46,6 +46,7 @@ export const getUserDataFromDatabase = async (user) => {
         data = doc.data();
         return 
     })
+    
     return data;
 
 }

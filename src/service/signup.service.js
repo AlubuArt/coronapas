@@ -14,7 +14,7 @@ export const makeNewUser = async (email, pass) => {
         email: email,
         userID: userID
     })
-
-    localStorage.setItem('userID', userID);
+    return userID;
+    
    
 }

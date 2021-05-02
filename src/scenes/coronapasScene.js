@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useReducer} from 'react';
+import React, {useEffect, useState, useReducer, useContext} from 'react';
 import {getUserDataFromDatabase} from '../service/firestore.service';
 import {getHomeWorldFromSwapi} from '../service/swapi.service';
 import {Container} from '@material-ui/core'
@@ -12,6 +12,8 @@ import CoronapasHeader from '../components/coronapas/coronapasHeader';
 import CoronapasBody from '../components/coronapas/coronapasBody';
 import CoronpasStatus from '../components/coronapas/coronapasStatus';
 import QrCode from '../components/coronapas/qrCode';
+import {UserContext }from '../userContext';
+import { withRouter } from 'react-router';
 
 
 const useStyles = makeStyles(() => ({
@@ -22,10 +24,10 @@ const useStyles = makeStyles(() => ({
 
   }));
 
-const CoronapassScene = ({userID}) => {
+const CoronapasScene = () => {
 
     const classes = useStyles();
-    const [user] = useState(userID);
+    const {userID} = useContext(UserContext)
     const [homeworldName, setHomeworldName] = useState('');
     const [qr] = useState(QR)
     const [coronapasData, setCoronapasData] = useReducer((value, newValue) => ({...value, ...newValue}), {
@@ -35,7 +37,7 @@ const CoronapassScene = ({userID}) => {
 
     const getCoronapasData = async () => {
         try {
-            const data =  await getUserDataFromDatabase(user);
+            const data =  await getUserDataFromDatabase(userID);
             for (let [key, val] of Object.entries(data)) {
                 setCoronapasData({[key]: val})
             }
@@ -95,4 +97,4 @@ const CoronapassScene = ({userID}) => {
     )
 }
 
-export default CoronapassScene;
+export default withRouter(CoronapasScene);

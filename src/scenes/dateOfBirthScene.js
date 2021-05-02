@@ -1,4 +1,4 @@
-import React, {useState, useReducer, useEffect} from 'react';
+import React, {useState, useReducer, useEffect, useContext} from 'react';
 import {Container, Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,7 @@ import {sendDataToDatabase} from '../service/firestore.service';
 import {getPersonSwapi} from '../service/swapi.service';
 import CardTitle from '../components/cardTitle';
 import { withRouter } from 'react-router';
+import { UserContext } from '../userContext';
 
 
 const useStyles = makeStyles(() => ({
@@ -44,10 +45,10 @@ const randomCoronaStatus = () => {
         
 }
 
-const DateOfBirthScene = ({history}, userID) => {
+const DateOfBirthScene = ({history}) => {
 
     const classes = useStyles();;
-    const [user] = useState(userID)
+    const {userID} = useContext(UserContext);
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [coronaStatus, setCoronaStatus] = useState('')
     const [starWarsPerson, setStarWarsPerson] = useReducer((value, newValue) => ({...value, ...newValue}), {
@@ -56,10 +57,9 @@ const DateOfBirthScene = ({history}, userID) => {
 
     const handleClick = () =>  {
         
-        sendDataToDatabase(user, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
+        sendDataToDatabase(userID, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
         if(dateOfBirth !== '' || undefined) {
-            
-            history.push(`${process.env.PUBLIC_URL}/uploadpicture`);
+            history.push(`${process.env.PUBLIC_URL}/upload`);
         } else {
             alert("Please input your date of birth before moving on")
         }

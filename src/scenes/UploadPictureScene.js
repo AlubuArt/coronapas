@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {Container, Input} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -9,6 +9,7 @@ import { CardActionArea } from '@material-ui/core';
 import {uploadPictureToStorage} from '../service/firestore.service';
 import CardTitle from '../components/cardTitle';
 import { withRouter } from 'react-router';
+import { UserContext } from '../userContext'
 
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -19,20 +20,19 @@ const useStyles = makeStyles(({ spacing }) => ({
   }));
 
 
-const UploadPictureScene = ({history}, userID) => {
+const UploadPictureScene = ({history}) => {
 
     const classes = useStyles();
-    const [user] = useState(userID);
+    const {userID} = useContext(UserContext)
 
 
     const handleClick = () => {
-        console.log("d")
         history.push(`${process.env.PUBLIC_URL}/coronapas`);
     }
 
     const getPictureToUpload = async () => {
         const selectedFile = await document.getElementById('picture-upload').files[0];
-        uploadPictureToStorage(user, selectedFile);
+        uploadPictureToStorage(userID, selectedFile);
        
     }
     return (

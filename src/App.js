@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,17 +10,19 @@ import SignupView from './pages/signup';
 import StartScene from './scenes/startScene';
 import DateOfBirthScene from './scenes/dateOfBirthScene';
 import UploadPictureScene from './scenes/UploadPictureScene';
-import CoronapassScene from './scenes/coronapasScene';
+import CoronapasScene from './scenes/coronapasScene';
 import {firebase_app} from './service/configs/firebase.config';
+import {UserContext} from './userContext';
 
 
 function App() {
 
-  const [user, setUser] = useState(localStorage.getItem('userID'));
+  const {userID} = useContext(UserContext);
+  const [user, setUser] = useState('')
 
   useEffect(() => {
     firebase_app.auth().onAuthStateChanged(setUser);
-   }, [])
+   }, [userID])
 
   return (
     
@@ -29,7 +31,7 @@ function App() {
         <Route path={`${process.env.PUBLIC_URL}/login`} component={LoginView}/>
         <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignupView}/>
         
-        { user !== null ? 
+        { userID !== '' ? 
         <>
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
             return (<Redirect to={`${process.env.PUBLIC_URL}/start`}/>)
@@ -38,9 +40,8 @@ function App() {
           <Route path={`${process.env.PUBLIC_URL}/start`} component={StartScene} />
           <Route path={`${process.env.PUBLIC_URL}/dob`} component={DateOfBirthScene} />
           <Route path={`${process.env.PUBLIC_URL}/upload`} component={UploadPictureScene} />
-          <Route path={`${process.env.PUBLIC_URL}/coronapas`} component={CoronapassScene} />
+          <Route path={`${process.env.PUBLIC_URL}/coronapas`} component={CoronapasScene} />
 
-          {/* <Route path={`${process.env.PUBLIC_URL}/start`} render={() =><AppLayout scene={0}/>}/> */}
         </>
         : 
         <Redirect to={`${process.env.PUBLIC_URL}/login`} />

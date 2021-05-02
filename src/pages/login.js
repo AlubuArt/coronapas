@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {login} from '../service/login.service';
 import {CardHeader, Container} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { withRouter } from 'react-router';
 import CardTitle from '../components/cardTitle';
+import {UserContext} from '../userContext';
 
 const useStyles = makeStyles(({ spacing }) => ({
       button : {
@@ -26,10 +27,12 @@ const LoginView = ({ history }) => {
     const classes = useStyles();
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
+    const  {setUser}  = useContext(UserContext);
 
     const loginUser = async () => {
         try {
-           await login(email, pass); 
+           const userID = await login(email, pass); 
+           setUser(userID)
            history.push(`${process.env.PUBLIC_URL}/start`)
         } catch (error) {
             console.log(error);
