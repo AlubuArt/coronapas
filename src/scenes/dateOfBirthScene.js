@@ -48,15 +48,12 @@ const randomCoronaStatus = () => {
 const DateOfBirthScene = ({history}) => {
 
     const classes = useStyles();
-    const {userID} = useContext(UserContext);
-    const [dateOfBirth, setDateOfBirth] = useState('');
-    const [coronaStatus, setCoronaStatus] = useState('');
-    const [starWarsPerson, setStarWarsPerson] = useState('');
-
+    const {userID, setDob, dob, coronaStatus, setCoronaStatus, starWarsPerson, setStarWarsPerson} = useContext(UserContext);
+    
     const handleClick = () =>  {
         
-        sendDataToDatabase(userID, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
-        if(dateOfBirth !== '' || undefined) {
+        //sendDataToDatabase(userID, dob, starWarsPerson, coronaStatus); //TODO error handling
+        if(dob !== '' || undefined) {
             history.push(`${process.env.PUBLIC_URL}/upload`);
         } else {
             alert("Please input your date of birth before moving on")
@@ -65,7 +62,7 @@ const DateOfBirthScene = ({history}) => {
     }
     useEffect( () => {
         setCoronaStatus(randomCoronaStatus())
-    },[])
+    },[setCoronaStatus])
 
     useEffect( () => {
         const getDataFromSwapi = async () => {
@@ -94,8 +91,8 @@ const DateOfBirthScene = ({history}) => {
                         className="form-control"
                         type="number"
                         label="ddmmyyyy"
-                        value={dateOfBirth}
-                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        value={dob}
+                        onChange={(e) => setDob(e.target.value)}
                     />
                     <div>   
                         <Button onClick={() => handleClick()} variant="contained" className={cx(classes.button)}>Next</Button>

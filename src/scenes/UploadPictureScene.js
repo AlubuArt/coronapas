@@ -6,7 +6,7 @@ import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
-import {uploadPictureToStorage} from '../service/firestore.service';
+import {uploadPictureToStorage, sendDataToDatabase} from '../service/firestore.service';
 import CardTitle from '../components/cardTitle';
 import { withRouter } from 'react-router';
 import { UserContext } from '../userContext'
@@ -23,16 +23,25 @@ const useStyles = makeStyles(({ spacing }) => ({
 const UploadPictureScene = ({history}) => {
 
     const classes = useStyles();
-    const {userID} = useContext(UserContext)
+    const { userID,
+            pictureURL, 
+            starWarsPerson, 
+            dob, 
+            coronaStatus, 
+            setPictureURL
+    } = useContext(UserContext)
 
 
-    const handleClick = () => {
+    const handleClick = async () => {
+        await sendDataToDatabase(userID, pictureURL, starWarsPerson, dob, coronaStatus,)
         history.push(`${process.env.PUBLIC_URL}/coronapas`);
     }
 
     const getPictureToUpload = async () => {
         const selectedFile = await document.getElementById('picture-upload').files[0];
-        uploadPictureToStorage(userID, selectedFile);
+        let url = await uploadPictureToStorage(selectedFile);
+        setPictureURL(url);
+
     }
     
     return (

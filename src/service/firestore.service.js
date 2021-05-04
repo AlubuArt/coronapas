@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 
 const storage = firebase_app.storage();
-const storageRef = storage.ref();
+const storageRef = storage.ref('userPictures/');
 const db = firebase_app.firestore();
 const coll = db.collection('users/');
 
@@ -22,9 +22,9 @@ export const checkIfUserHasPass = async (user) => {
     return result  
 }
 
-export const sendDataToDatabase = async (user, dob, data, status) => {
+export const sendDataToDatabase = async (user, picture,data, dob, status) => {
     let ref = coll.doc(user);
-    ref.set({
+    await ref.set({
         dateOfBirth: dob,
         name: data.name,
         height: data.height,
@@ -34,9 +34,13 @@ export const sendDataToDatabase = async (user, dob, data, status) => {
         eyeColor: data.eye_color,
         gender: data.gender,
         homeworld: data.homeworld,
-        coronaStatus: status
+        coronaStatus: status,
+        picture: picture,
+
 
     }, {merge: true})
+
+    return true
 
 }
 
@@ -53,15 +57,16 @@ export const getUserDataFromDatabase = async (user) => {
 
 }
 
-export const uploadPictureToStorage = async (user, picture) => {
-    let upload = await storageRef.child('userPictures/' + picture.name).put(picture);
-    upload.snapshot.ref.getDownloadURL().then((URLToFile) => {
-          addFileToUserProfile(user, URLToFile);
-      })
+export const uploadPictureToStorage = async (picture) => {
+    
+    let upload =  storageRef.child(picture.name);
+    await upload.put(picture)
+    let url = await upload.getDownloadURL()
+    return url;
 }
 
 
-
+/* 
 const addFileToUserProfile = (user, URLToFile) => {
     let ref = coll.doc(user);
     ref.set({
@@ -69,4 +74,4 @@ const addFileToUserProfile = (user, URLToFile) => {
   
     }, {merge: true} );
   }
-
+ */
