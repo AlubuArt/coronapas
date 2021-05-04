@@ -12,6 +12,7 @@ import {makeNewUser }from '../service/signup.service';
 import {firebase_app} from '../service/configs/firebase.config';
 import CardTilte from '../components/cardTitle';
 import {UserContext} from '../userContext';
+import {PrimaryButton} from '../components/buttons';
 
 const useStyles = makeStyles(({ spacing }) => ({
     
@@ -74,7 +75,11 @@ const SignupView = ({history}) => {
                                 onChange={(e) =>setPass(e.target.value)}
                             />
                             <div>
-                                <Button onClick={() => newUser()} variant="contained" className={cx(classes.button)}>Create new user</Button>   
+                                <PrimaryButton onClick={() => newUser()} 
+                                    variant="contained" 
+                                    className={cx(classes.button)}>
+                                        Create new user
+                                </PrimaryButton>   
                             </div>
                         </CardContent>
                     </CardActionArea>  

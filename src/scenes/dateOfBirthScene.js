@@ -1,27 +1,15 @@
-import React, {useState, useReducer, useEffect, useContext} from 'react';
-import {Container, Typography} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useContext} from 'react';
+import {Container} from '@material-ui/core'
 import Card from '@material-ui/core/Card';
-import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import {sendDataToDatabase} from '../service/firestore.service';
 import {getPersonSwapi} from '../service/swapi.service';
 import CardTitle from '../components/cardTitle';
 import { withRouter } from 'react-router';
 import { UserContext } from '../userContext';
+import {PrimaryButton} from '../components/buttons';
 
-
-const useStyles = makeStyles(() => ({
-    
-      button : {
-          marginTop: 20,
-          marginRight: 20
-      }
-
-  }));
 
 const randomNumber = () => {
        return Math.floor((Math.random() * 82) + 1);
@@ -47,25 +35,23 @@ const randomCoronaStatus = () => {
 
 const DateOfBirthScene = ({history}) => {
 
-    const classes = useStyles();
-    const {userID} = useContext(UserContext);
-    const [dateOfBirth, setDateOfBirth] = useState('');
-    const [coronaStatus, setCoronaStatus] = useState('');
-    const [starWarsPerson, setStarWarsPerson] = useState('');
-
+    
+    const {setDob, dob,  setCoronaStatus, setStarWarsPerson} = useContext(UserContext);
+    
     const handleClick = () =>  {
         
-        sendDataToDatabase(userID, dateOfBirth, starWarsPerson, coronaStatus); //TODO error handling
-        if(dateOfBirth !== '' || undefined) {
+        
+        if(dob !== '' || undefined) {
             history.push(`${process.env.PUBLIC_URL}/upload`);
         } else {
             alert("Please input your date of birth before moving on")
         }
         
     }
+
     useEffect( () => {
         setCoronaStatus(randomCoronaStatus())
-    },[])
+    },[setCoronaStatus])
 
     useEffect( () => {
         const getDataFromSwapi = async () => {
@@ -74,12 +60,11 @@ const DateOfBirthScene = ({history}) => {
             setStarWarsPerson(prevState => ({ 
                     ...prevState, 
                     [key]: val
-            }))
-                  
+            })) 
      }}
      getDataFromSwapi()    
 
-    }, [])
+    }, [setStarWarsPerson])
 
 
     return (
@@ -94,11 +79,11 @@ const DateOfBirthScene = ({history}) => {
                         className="form-control"
                         type="number"
                         label="ddmmyyyy"
-                        value={dateOfBirth}
-                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        value={dob}
+                        onChange={(e) => setDob(e.target.value)}
                     />
                     <div>   
-                        <Button onClick={() => handleClick()} variant="contained" className={cx(classes.button)}>Next</Button>
+                        <PrimaryButton onClick={() => handleClick()}>Next</PrimaryButton>
                     </div>
                 </CardContent>
             </CardActionArea>
