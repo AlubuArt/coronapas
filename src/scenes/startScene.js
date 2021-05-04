@@ -7,7 +7,8 @@ import { CardActionArea } from '@material-ui/core';
 import CardTitle from '../components/cardTitle';
 import { withRouter } from 'react-router';
 import {UserContext} from '../userContext';
-import { checkIfUserHasPass} from '../service/firestore.service'
+import { checkIfUserHasPass} from '../service/firestore.service';
+import {PrimaryButton} from '../components/buttons';
 
 
 
@@ -39,10 +40,7 @@ const StartScene = ({history}) => {
                         <CardTitle  
                             text="Your journey here begins"
                         />
-                     <div>
-                        <Button onClick={() => handleClick()} variant="contained">Start</Button> 
-                     </div>
-                        
+                        <PrimaryButton onClick={() => handleClick()} >Start</PrimaryButton> 
                     </CardContent>
                 </CardActionArea>
             </Card>

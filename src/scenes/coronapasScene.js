@@ -15,7 +15,8 @@ import QrCode from '../components/coronapas/qrCode';
 import {UserContext }from '../userContext';
 import { withRouter } from 'react-router';
 import {logout} from '../service/login.service';
-import Button from '@material-ui/core/Button';
+import {SecondaryButton} from '../components/buttons';
+
 
 const useStyles = makeStyles(() => ({
     
@@ -69,7 +70,7 @@ const CoronapasScene = ({history}) => {
     
 
     return (
-        <Container className="coronapas-container" fluid>
+        <Container className="coronapas-container" >
             <Card className="coronapas-card">
                 <CardActionArea>
                     <CardContent >
@@ -78,26 +79,21 @@ const CoronapasScene = ({history}) => {
                             picture={coronapasData.picture}
                             style={classes.img}
                         />
-
                         <CoronapasBody 
                             data={coronapasData}
                             homeworldName={homeworldName}
                         />
-
                         <CoronpasStatus 
                             status={coronapasData.coronaStatus}
                         />
-
                         <QrCode 
                             code={qr}
                         />
-                        
-                    </CardContent>
+                    </CardContent> 
                 </CardActionArea>
-                
             </Card> 
             <div>
-              <Button variant="contained" onClick={() => handleClick()}>Logout</Button>  
+               <SecondaryButton variant="contained" onClick={() => handleClick()}>Logout</SecondaryButton> 
             </div>
             
         </Container>

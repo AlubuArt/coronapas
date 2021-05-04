@@ -45,16 +45,13 @@ export const sendDataToDatabase = async (user, picture,data, dob, status) => {
 }
 
 export const getUserDataFromDatabase = async (user) => {
-
     let data;
     let ref = coll.doc(user);
     await ref.get().then((doc) => {
         data = doc.data();
         return 
     })
-    
     return data;
-
 }
 
 export const uploadPictureToStorage = async (picture) => {
@@ -64,14 +61,3 @@ export const uploadPictureToStorage = async (picture) => {
     let url = await upload.getDownloadURL()
     return url;
 }
-
-
-/* 
-const addFileToUserProfile = (user, URLToFile) => {
-    let ref = coll.doc(user);
-    ref.set({
-      picture: URLToFile
-  
-    }, {merge: true} );
-  }
- */

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,8 +29,6 @@ function App() {
     });
    },[setUser]) 
 
-  
-
   return (
     
     <Router basename="/">
@@ -41,7 +39,6 @@ function App() {
         { userID !== null ? 
 
         <>
-        
           <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => {
             return (<Redirect to={`${process.env.PUBLIC_URL}/start`} />)
             
@@ -53,10 +50,7 @@ function App() {
 
         </>
         : 
-          
-
         <Redirect to={`${process.env.PUBLIC_URL}/login`} />
-        
         }
       </Switch>
     </Router>

@@ -15,8 +15,6 @@ export const UserProvider = ({children}) => {
     setUserID(userID)
   }
 
-  
-
   return (
     <UserContext.Provider value={{userID, setUser, dob, setDob, coronaStatus, setCoronaStatus, starWarsPerson, setStarWarsPerson, pictureURL, setPictureURL}}>
     {children}
