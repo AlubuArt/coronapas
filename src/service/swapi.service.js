@@ -1,3 +1,4 @@
+
 const axios = require('axios');
 
 export const getPersonSwapi = async (req) => {
@@ -23,11 +24,10 @@ return data;
 
 export const getHomeWorldFromSwapi = async (req) => {
 
-  let param = req.homeworld
+  let param = req
   var config = {
     method: 'get',
-    url: `${param}`,
-    headers: { }
+    url: `${param}`
   };
 
 const data = await axios(config)

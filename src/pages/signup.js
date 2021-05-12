@@ -10,6 +10,7 @@ import {firebase_app} from '../service/configs/firebase.config';
 import CardTilte from '../components/cardTitle';
 import {UserContext} from '../userContext';
 import {PrimaryButton} from '../components/buttons';
+import {signupErrorMessage} from '../utils/errorHandling/errorFunction';
 
 
 
@@ -25,19 +26,20 @@ const SignupView = ({history}) => {
             setUser(id);
             handleRedirectOnSuccess();
         } catch (error) {
-            alert(error)
+            signupErrorMessage(error.code);
+            
         }
-    }
-
+    }   
     const handleRedirectOnSuccess = async () => {
         try {
             await firebase_app.auth().signInWithEmailAndPassword(email, pass);
             history.push(`${process.env.PUBLIC_URL}/start`)
         } catch (error) {
-            alert(error);
+            alert(error.code);
         }
     }
-
+    
+    
     return (
         <Container className="coronapas-container" fluid>
                 <Card className="card-container">

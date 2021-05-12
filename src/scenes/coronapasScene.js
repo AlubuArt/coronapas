@@ -59,13 +59,13 @@ const CoronapasScene = ({history}) => {
     useEffect(() => {
         const getHomeWorld = async () => {
             try {
-                const hw = await getHomeWorldFromSwapi(coronapasData);
+                const hw = await getHomeWorldFromSwapi(coronapasData.homeworld);
                 setHomeworldName(hw);
             } catch (error) {}
         }
         getHomeWorld()
     
-    }, [coronapasData])
+    }, [coronapasData.homeworld])
 
     
 

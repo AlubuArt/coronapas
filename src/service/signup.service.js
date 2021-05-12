@@ -6,7 +6,7 @@ const coll = db.collection('users/')
 
 export const makeNewUser = async (email, pass) => {
 
-
+    
     const userObj = await firebase_app.auth().createUserWithEmailAndPassword(email, pass);
     const user = userObj.user;
     const userID = user.uid;
