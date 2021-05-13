@@ -29,7 +29,11 @@ const LoginView = ({ history }) => {
     }
 
     const signup = () => {
-        history.push(`${process.env.PUBLIC_URL}/signup`)
+        try{
+            history.push(`${process.env.PUBLIC_URL}/signup`)
+        } catch (error) {
+            console(error);
+        }
     }
 
     return (

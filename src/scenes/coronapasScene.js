@@ -67,8 +67,6 @@ const CoronapasScene = ({history}) => {
     
     }, [coronapasData.homeworld])
 
-    
-
     return (
         <Container className="coronapas-container" >
             <Card className="coronapas-card">

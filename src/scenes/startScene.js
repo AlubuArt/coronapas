@@ -2,7 +2,6 @@ import React, { useContext, useEffect} from 'react';
 import {Container} from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import CardTitle from '../components/cardTitle';
 import { withRouter } from 'react-router';
@@ -12,8 +11,8 @@ import {PrimaryButton} from '../components/buttons';
 
 
 
-const StartScene = ({history}) => {
 
+const StartScene = ({history}) => {
     const {userID} = useContext(UserContext);
 
     const handleClick = () => {
