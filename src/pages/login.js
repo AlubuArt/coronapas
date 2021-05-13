@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, {useState, useContext} from 'react';
 import {login} from '../service/login.service';
 import {Container} from '@material-ui/core';
@@ -9,8 +10,7 @@ import { withRouter } from 'react-router';
 import CardTitle from '../components/cardTitle';
 import {UserContext} from '../userContext';
 import {PrimaryButton, SecondaryButton} from '../components/buttons';
-
-
+import {loginErrorMessage} from '../utils/errorHandling/errorFunction';
 
 const LoginView = ({ history }) => {
 
@@ -24,13 +24,16 @@ const LoginView = ({ history }) => {
            setUser(userID)
            history.push(`${process.env.PUBLIC_URL}/start`)
         } catch (error) {
-            console.log(error);
+            loginErrorMessage(error.code);
         }
-       
     }
 
     const signup = () => {
-        history.push(`${process.env.PUBLIC_URL}/signup`)
+        try{
+            history.push(`${process.env.PUBLIC_URL}/signup`)
+        } catch (error) {
+            console(error);
+        }
     }
 
     return (
@@ -57,7 +60,7 @@ const LoginView = ({ history }) => {
                                 <PrimaryButton onClick={() => loginUser()}>Login</PrimaryButton>   
                                 <SecondaryButton onClick={() => signup()} >New user</SecondaryButton>   
                             </div>
-                        </CardContent>
+                                </CardContent>
                     </CardActionArea>  
                 </Card>
         </Container>

@@ -11,18 +11,24 @@ const coll = db.collection('users/');
 
 export const checkIfUserHasPass = async (user) => {
     let result = false;
-    let ref = coll.doc(user);
-    await ref.get().then((doc) => {
-        if(doc.data().picture) {
-            result = true;
-        } else {
-            result = false;
-        }
-    })
+
+    try {        
+        let ref = coll.doc(user);
+        await ref.get().then((doc) => {
+            if(doc.data().picture) {
+                result = true;
+            } else {
+                result = false;
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+    
     return result  
 }
 
-export const sendDataToDatabase = async (user, picture,data, dob, status) => {
+export const sendDataToDatabase = async (user, picture, data, dob, status) => {
     let ref = coll.doc(user);
     await ref.set({
         dateOfBirth: dob,
@@ -37,8 +43,7 @@ export const sendDataToDatabase = async (user, picture,data, dob, status) => {
         coronaStatus: status,
         picture: picture,
 
-
-    }, {merge: true})
+   }, {merge: true})
 
     return true
 

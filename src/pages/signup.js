@@ -1,10 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {Container} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import cx from 'clsx';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import { CardActionArea } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { withRouter } from 'react-router';
@@ -13,27 +10,15 @@ import {firebase_app} from '../service/configs/firebase.config';
 import CardTilte from '../components/cardTitle';
 import {UserContext} from '../userContext';
 import {PrimaryButton} from '../components/buttons';
+import {signupErrorMessage} from '../utils/errorHandling/errorFunction';
 
-const useStyles = makeStyles(({ spacing }) => ({
-    
-      button : {
-          marginTop: 20,
-          marginRight: 10,
-          marginLeft: 10,
 
-      }, 
-      TextField : {
-          
-      }
-  }));
 
 const SignupView = ({history}) => {
-
-    const classes = useStyles();
+   
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
     const {setUser} = useContext(UserContext);
-
 
     const newUser = async () => {
         try{
@@ -41,19 +26,20 @@ const SignupView = ({history}) => {
             setUser(id);
             handleRedirectOnSuccess();
         } catch (error) {
-            console.log(error)
+            signupErrorMessage(error.code);
+            
         }
-    }
-
+    }   
     const handleRedirectOnSuccess = async () => {
         try {
             await firebase_app.auth().signInWithEmailAndPassword(email, pass);
             history.push(`${process.env.PUBLIC_URL}/start`)
         } catch (error) {
-            console.log(error);
+            alert(error.code);
         }
     }
-
+    
+    
     return (
         <Container className="coronapas-container" fluid>
                 <Card className="card-container">
@@ -77,7 +63,7 @@ const SignupView = ({history}) => {
                             <div>
                                 <PrimaryButton onClick={() => newUser()} 
                                     variant="contained" 
-                                    className={cx(classes.button)}>
+                                    >
                                         Create new user
                                 </PrimaryButton>   
                             </div>

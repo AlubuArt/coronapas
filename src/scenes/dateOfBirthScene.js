@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, { useEffect, useContext} from 'react';
 import {Container} from '@material-ui/core'
 import Card from '@material-ui/core/Card';
@@ -15,10 +16,10 @@ const randomNumber = () => {
        return Math.floor((Math.random() * 82) + 1);
 }
 
+let n = Math.floor((Math.random() * 5) + 1);
 const randomCoronaStatus = () => {
-   let n = Math.floor((Math.random() * 5) + 1);
-   // eslint-disable-next-line default-case
    switch(n) {
+   // eslint-disable-next-line default-case
        case 1:
            return "Vaccinated"
        case 2:
@@ -35,18 +36,14 @@ const randomCoronaStatus = () => {
 
 const DateOfBirthScene = ({history}) => {
 
-    
     const {setDob, dob,  setCoronaStatus, setStarWarsPerson} = useContext(UserContext);
     
     const handleClick = () =>  {
-        
-        
         if(dob !== '' || undefined) {
             history.push(`${process.env.PUBLIC_URL}/upload`);
         } else {
             alert("Please input your date of birth before moving on")
         }
-        
     }
 
     useEffect( () => {
